@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-white text-gray-800 antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-electric-500 hover:bg-electric-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40 hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-electric-500 text-electric-500 hover:bg-electric-500 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-gray-600 hover:text-electric-500 font-medium px-4 py-2 rounded-lg transition-colors duration-200;
+  }
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1;
+  }
+  .section-label {
+    @apply inline-flex items-center gap-2 text-electric-500 text-sm font-semibold tracking-widest uppercase mb-4 font-mono;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight;
+  }
+  .section-subtitle {
+    @apply text-lg text-gray-500 leading-relaxed max-w-2xl;
+  }
+  .nav-link {
+    @apply text-gray-600 hover:text-navy-900 font-medium text-sm transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-electric-500 after:transition-all after:duration-300 hover:after:w-full pb-0.5;
+  }
+  .nav-link-active {
+    @apply text-navy-900 font-semibold after:w-full;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-white;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-electric-500 to-purple-500 bg-clip-text text-transparent;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #eef4f8; }
+::-webkit-scrollbar-thumb { background: #BDD8E9; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #7BBDE8; }
+
+/* Smooth reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
