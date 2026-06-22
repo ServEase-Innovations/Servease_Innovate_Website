@@ -42,14 +42,14 @@ export default function Product() {
       {/* Hero */}
       <section className="bg-navy-900 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-electric-200/20 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <span className="section-label text-electric-400">
             <Package size={12} /> Our Products
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
             Products that solve{' '}
-            <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
               real problems
             </span>
           </h1>

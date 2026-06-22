@@ -24,9 +24,9 @@ const services = [
   {
     id: 'product-dev',
     icon: <Code2 size={28} />,
-    color: 'from-electric-500 to-purple-600',
+    color: 'from-electric-600 to-electric-400',
     bg: 'bg-electric-500/8',
-    accent: 'text-electric-500',
+    accent: 'text-electric-600',
     label: 'Product Development',
     headline: 'From idea to market — every step covered',
     body: `Product development is the process of taking a product from an idea through its market release and beyond: planning, analysis, design, implementation, testing, deployment, and maintenance. Each stage plays a crucial role in ensuring the product meets the needs of its intended users and performs reliably.`,
@@ -43,9 +43,9 @@ const services = [
   {
     id: 'it-staffing',
     icon: <Users size={28} />,
-    color: 'from-purple-500 to-pink-600',
-    bg: 'bg-purple-500/8',
-    accent: 'text-purple-600',
+    color: 'from-electric-500 to-electric-300',
+    bg: 'bg-electric-500/8',
+    accent: 'text-electric-600',
     label: 'IT Staffing',
     headline: 'The right talent, exactly when you need it',
     body: `IT staffing has become essential in today's competitive landscape. By partnering with us, businesses gain access to a pool of highly skilled professionals tailored to their specific needs — from temporary and contract positions to full-time placements and executive searches.`,
@@ -60,9 +60,9 @@ const services = [
   {
     id: 'qa-testing',
     icon: <TestTube2 size={28} />,
-    color: 'from-emerald-500 to-teal-600',
-    bg: 'bg-emerald-500/8',
-    accent: 'text-emerald-600',
+    color: 'from-electric-600 to-electric-400',
+    bg: 'bg-electric-500/8',
+    accent: 'text-electric-600',
     label: 'QA & Testing Services',
     headline: '20+ years ensuring nothing ships broken',
     body: `Quality assurance, testing, and automation are integral to the SDLC — guaranteeing that products meet stringent quality and performance standards before reaching end-users. Our QA team covers functional, performance, security, and usability testing across the full spectrum.`,
@@ -77,9 +77,9 @@ const services = [
   {
     id: 'web-design',
     icon: <Palette size={28} />,
-    color: 'from-sky-500 to-blue-600',
-    bg: 'bg-sky-500/8',
-    accent: 'text-sky-600',
+    color: 'from-electric-500 to-electric-300',
+    bg: 'bg-electric-500/8',
+    accent: 'text-electric-600',
     label: 'Web Design',
     headline: 'Beautiful, accessible, responsive experiences',
     body: `Web design is a dynamic field that blends creativity with technology. We create visually appealing and functional websites that provide an optimal user experience — considering layout, color schemes, typography, and imagery to harmoniously convey your brand identity. Accessibility and responsive design are not afterthoughts; they're built in from the start.`,
@@ -94,9 +94,9 @@ const services = [
   {
     id: 'automation',
     icon: <Bot size={28} />,
-    color: 'from-amber-500 to-orange-600',
-    bg: 'bg-amber-500/8',
-    accent: 'text-amber-600',
+    color: 'from-electric-600 to-electric-400',
+    bg: 'bg-electric-500/8',
+    accent: 'text-electric-600',
     label: 'Automation Development',
     headline: 'Gen AI-powered automation any team can run',
     body: `Our award-winning codeless automation framework enables Business Analysts and Manual Testers to automate without writing code. We've integrated Gen AI to generate BDD feature files automatically, making automation faster and more accessible than ever.`,
@@ -118,7 +118,7 @@ export default function Services() {
             <Rocket size={12} /> Services
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
-            Technology services <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">for every stage</span>
+            Technology services <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">for every stage</span>
           </h1>
           <p className="text-white/55 text-lg max-w-xl leading-relaxed">
             From product development to automated testing, our end-to-end services help you build, ship, and scale with confidence.
@@ -178,8 +178,8 @@ export default function Services() {
                   {svc.frameworks && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {automationFrameworks.map((fw) => (
-                        <div key={fw.label} className="flex items-center gap-2.5 bg-amber-50 text-amber-800 text-sm px-3 py-2.5 rounded-xl border border-amber-100">
-                          <span className="text-amber-500">{fw.icon}</span>
+                        <div key={fw.label} className="flex items-center gap-2.5 bg-electric-50 text-electric-800 text-sm px-3 py-2.5 rounded-2xl border border-electric-100">
+                          <span className="text-electric-500">{fw.icon}</span>
                           {fw.label}
                         </div>
                       ))}
@@ -209,7 +209,7 @@ export default function Services() {
                   ) : (
                     <div className={`${svc.bg} rounded-3xl p-8 lg:p-10 flex flex-col gap-4`}>
                       <div className="font-display font-bold text-navy-900 text-2xl mb-2">{svc.label}</div>
-                      <div className="w-12 h-1 bg-gradient-to-r from-electric-500 to-purple-500 rounded-full mb-4" />
+                      <div className="w-12 h-1 bg-gradient-to-r from-electric-600 to-electric-300 rounded-full mb-4" />
                       <p className="text-gray-600 leading-relaxed text-sm">{svc.body}</p>
                       <Link to="/contact" className="mt-4 btn-primary self-start text-sm">
                         Get a Quote <ArrowRight size={14} />

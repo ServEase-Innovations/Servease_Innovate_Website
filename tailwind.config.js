@@ -8,15 +8,21 @@ export default {
     extend: {
       colors: {
         navy: {
-          900: '#001D39',
-          800: '#0A4174',
-          700: '#49769F',
-          600: '#4E8EA2',
+          900: '#06205C',
+          800: '#0B2E78',
+          700: '#0E3C9B',
+          600: '#1551B8',
         },
         electric: {
-          500: '#4E8EA2',
-          400: '#6EA2B3',
-          300: '#7BBDE8',
+          800: '#063A73',
+          700: '#08539C',
+          600: '#0B6FD1',
+          500: '#1A8DE8',
+          400: '#43A8F2',
+          300: '#7BC4F5',
+          200: '#AEDCF9',
+          100: '#DCEFFC',
+          50: '#EFF8FE',
         },
         gold: {
           500: '#C99A4A',
@@ -53,7 +59,9 @@ export default {
         },
       },
       backgroundImage: {
-        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234E8EA2' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A8DE8' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        'hero-gradient': 'linear-gradient(125deg, #06205C 0%, #0B6FD1 38%, #43A8F2 65%, #8FD4B1 100%)',
+        'cta-gradient': 'linear-gradient(120deg, #06205C 0%, #0E3C9B 100%)',
       },
     },
   },

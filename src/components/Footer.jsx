@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <footer className="bg-navy-900 text-white">
       {/* Top CTA strip */}
-      <div className="border-b border-white/10 bg-gradient-to-r from-electric-500/20 to-purple-600/20">
+      <div className="border-b border-white/10 bg-gradient-to-r from-electric-500/20 to-electric-300/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-display font-bold text-xl mb-1">Ready to empower your digital future?</h3>
@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-xl hover:bg-electric-300 hover:text-navy-900 transition-colors duration-200 whitespace-nowrap"
+            className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-full hover:bg-electric-300 hover:text-navy-900 transition-colors duration-200 whitespace-nowrap"
           >
             Start a Conversation
           </Link>
@@ -45,7 +45,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-5">
-              <div className="w-9 h-9 bg-gradient-to-br from-electric-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-9 h-9 bg-gradient-to-br from-electric-600 to-electric-400 rounded-lg flex items-center justify-center">
                 <Zap size={18} className="text-white fill-white" />
               </div>
               <div className="flex flex-col leading-none">

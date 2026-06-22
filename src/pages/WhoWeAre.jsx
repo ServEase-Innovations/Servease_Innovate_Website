@@ -8,29 +8,29 @@ import { useScrollRevealAll } from '../hooks/useScrollReveal';
 const values = [
   {
     icon: <Lightbulb size={22} />,
-    color: 'from-amber-400 to-orange-500',
-    bg: 'bg-amber-50',
+    color: 'from-electric-500 to-electric-300',
+    bg: 'bg-electric-50',
     title: 'Innovation First',
     desc: 'We strive to create a collaborative environment where creativity flourishes and groundbreaking solutions emerge. Every project is driven by a passion for excellence.',
   },
   {
     icon: <Handshake size={22} />,
-    color: 'from-electric-500 to-purple-600',
+    color: 'from-electric-600 to-electric-400',
     bg: 'bg-electric-50',
     title: 'Partnership Over Transaction',
     desc: "We believe in the power of partnership. By fostering open communication and building strong relationships, every solution is tailored to meet your specific goals.",
   },
   {
     icon: <Heart size={22} />,
-    color: 'from-rose-400 to-pink-600',
-    bg: 'bg-rose-50',
+    color: 'from-electric-500 to-electric-300',
+    bg: 'bg-electric-50',
     title: 'Community Impact',
     desc: 'Through our CSR initiatives, we help lower-to-middle class citizens find employment based on their interests, supporting education, volunteering, and diversity.',
   },
   {
     icon: <Globe2 size={22} />,
-    color: 'from-emerald-500 to-teal-600',
-    bg: 'bg-emerald-50',
+    color: 'from-electric-600 to-electric-400',
+    bg: 'bg-electric-50',
     title: 'Sustainable Future',
     desc: 'We remain dedicated to making a positive impact — through sustainable practices, community engagement, and cutting-edge technology for a brighter, inclusive world.',
   },
@@ -67,7 +67,7 @@ export default function WhoWeAre() {
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
             We innovate for{' '}
-            <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
               better lives
             </span>
           </h1>
@@ -84,7 +84,7 @@ export default function WhoWeAre() {
             <div className="reveal bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-8 lg:p-10 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-electric-500/10 rounded-full blur-2xl" />
               <div className="relative">
-                <div className="w-12 h-12 bg-electric-500/20 rounded-xl flex items-center justify-center text-electric-400 mb-5">
+                <div className="w-12 h-12 bg-electric-500/20 rounded-2xl flex items-center justify-center text-electric-400 mb-5">
                   <Target size={22} />
                 </div>
                 <h2 className="text-2xl font-display font-bold text-white mb-4">Our Mission</h2>
@@ -94,8 +94,8 @@ export default function WhoWeAre() {
               </div>
             </div>
 
-            <div className="reveal bg-gradient-to-br from-electric-500/8 to-purple-500/8 rounded-3xl p-8 lg:p-10 border border-electric-100">
-              <div className="w-12 h-12 bg-electric-500/15 rounded-xl flex items-center justify-center text-electric-500 mb-5">
+            <div className="reveal bg-gradient-to-br from-electric-500/8 to-electric-300/10 rounded-3xl p-8 lg:p-10 border border-electric-100">
+              <div className="w-12 h-12 bg-electric-500/15 rounded-2xl flex items-center justify-center text-electric-500 mb-5">
                 <Globe2 size={22} />
               </div>
               <h2 className="text-2xl font-display font-bold text-navy-900 mb-4">Our Vision</h2>
@@ -167,7 +167,7 @@ export default function WhoWeAre() {
                 className="card p-6 reveal"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className={`w-12 h-12 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center text-white mb-4 shadow-md`}>
+                <div className={`w-12 h-12 bg-gradient-to-br ${color} rounded-2xl flex items-center justify-center text-white mb-4 shadow-md`}>
                   {icon}
                 </div>
                 <h3 className="font-display font-semibold text-navy-900 mb-2">{title}</h3>
@@ -227,7 +227,7 @@ export default function WhoWeAre() {
               <p className="text-white/55 leading-relaxed mb-8">
                 Our team comprises highly skilled professionals with expertise in diverse areas of IT. We stay current with the latest trends and technologies to deliver the best solutions.
               </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-xl hover:bg-electric-300 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-full hover:bg-electric-300 transition-colors">
                 Work With Us <ArrowRight size={16} />
               </Link>
             </div>

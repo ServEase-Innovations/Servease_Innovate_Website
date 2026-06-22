@@ -19,16 +19,16 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center gap-2 bg-electric-500 hover:bg-electric-400 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40 hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center gap-2 bg-electric-500 hover:bg-electric-400 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40 hover:-translate-y-0.5 active:translate-y-0;
   }
   .btn-outline {
-    @apply inline-flex items-center gap-2 border-2 border-electric-500 text-electric-500 hover:bg-electric-500 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5;
+    @apply inline-flex items-center gap-2 border-2 border-electric-500 text-electric-500 hover:bg-electric-500 hover:text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 hover:-translate-y-0.5;
   }
   .btn-ghost {
-    @apply inline-flex items-center gap-2 text-gray-600 hover:text-electric-500 font-medium px-4 py-2 rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center gap-2 text-gray-600 hover:text-electric-500 font-medium px-4 py-2 rounded-full transition-colors duration-200;
   }
   .card {
-    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1;
+    @apply bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-navy-900/5 transition-all duration-300 hover:-translate-y-1;
   }
   .section-label {
     @apply inline-flex items-center gap-2 text-electric-500 text-sm font-semibold tracking-widest uppercase mb-4 font-mono;
@@ -46,18 +46,18 @@
     @apply text-navy-900 font-semibold after:w-full;
   }
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-white;
+    @apply w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all duration-200 text-gray-800 placeholder-gray-400 bg-white;
   }
   .gradient-text {
-    @apply bg-gradient-to-r from-electric-500 to-purple-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-electric-600 via-electric-500 to-electric-300 bg-clip-text text-transparent;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #eef4f8; }
-::-webkit-scrollbar-thumb { background: #BDD8E9; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #7BBDE8; }
+::-webkit-scrollbar-track { background: #eef6fd; }
+::-webkit-scrollbar-thumb { background: #AEDCF9; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #43A8F2; }
 
 /* Smooth reveal on scroll */
 .reveal {

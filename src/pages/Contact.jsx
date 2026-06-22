@@ -62,7 +62,7 @@ export default function Contact() {
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
             Let's start a{' '}
-            <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
               conversation
             </span>
           </h1>
@@ -87,7 +87,7 @@ export default function Contact() {
 
               {contactInfo.map(({ icon, label, value, href, sub }) => (
                 <div key={label} className="flex gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-electric-200 hover:shadow-sm transition-all duration-200">
-                  <div className="w-10 h-10 bg-electric-500/10 rounded-xl flex items-center justify-center text-electric-500 shrink-0">
+                  <div className="w-10 h-10 bg-electric-500/10 rounded-2xl flex items-center justify-center text-electric-500 shrink-0">
                     {icon}
                   </div>
                   <div>

@@ -26,7 +26,7 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-50 animate-fade-up">
-      <div className="bg-navy-900 text-white rounded-2xl shadow-2xl p-5 border border-white/10">
+      <div className="bg-navy-900 text-white rounded-3xl shadow-2xl p-5 border border-white/10">
         <div className="flex items-start gap-3 mb-4">
           <Cookie size={18} className="text-electric-400 shrink-0 mt-0.5" />
           <div>
@@ -42,13 +42,13 @@ export default function CookieBanner() {
         <div className="flex gap-3">
           <button
             onClick={decline}
-            className="flex-1 px-4 py-2 text-xs font-medium text-white/60 border border-white/20 rounded-lg hover:bg-white/10 transition-colors"
+            className="flex-1 px-4 py-2 text-xs font-medium text-white/60 border border-white/20 rounded-full hover:bg-white/10 transition-colors"
           >
             Decline
           </button>
           <button
             onClick={accept}
-            className="flex-1 px-4 py-2 text-xs font-semibold bg-electric-500 hover:bg-electric-400 text-white rounded-lg transition-colors"
+            className="flex-1 px-4 py-2 text-xs font-semibold bg-electric-500 hover:bg-electric-400 text-white rounded-full transition-colors"
           >
             Accept
           </button>

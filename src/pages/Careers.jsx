@@ -107,7 +107,7 @@ function JobCard({ job }) {
                 ))}
               </ul>
 
-              <div className="mt-8 bg-electric-50 border border-electric-200 rounded-xl p-5">
+              <div className="mt-8 bg-electric-50 border border-electric-200 rounded-2xl p-5">
                 <p className="text-electric-800 text-sm font-medium mb-3">Ready to apply?</p>
                 <p className="text-electric-700/70 text-sm mb-4">
                   Share your resume. Shortlisted candidates will be contacted by our HR team.
@@ -148,14 +148,14 @@ export default function Careers() {
       {/* Hero */}
       <section className="bg-navy-900 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-200/20 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <span className="section-label text-electric-400">
             <Briefcase size={12} /> Careers
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
             We are{' '}
-            <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
               hiring
             </span>
           </h1>
@@ -171,7 +171,7 @@ export default function Careers() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {perks.map(({ icon, label }) => (
               <div key={label} className="flex items-center gap-3 text-gray-600 reveal">
-                <div className="w-9 h-9 bg-electric-50 border border-electric-100 rounded-xl flex items-center justify-center text-electric-500 shrink-0">
+                <div className="w-9 h-9 bg-electric-50 border border-electric-100 rounded-2xl flex items-center justify-center text-electric-500 shrink-0">
                   {icon}
                 </div>
                 <span className="text-sm font-medium">{label}</span>
@@ -212,7 +212,7 @@ export default function Careers() {
               </p>
               <a
                 href="mailto:hr@serveaseinnovation.com"
-                className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-electric-300 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-electric-300 transition-colors"
               >
                 <Mail size={14} />
                 Send Open Application

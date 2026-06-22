@@ -9,34 +9,34 @@ import { useScrollRevealAll } from '../hooks/useScrollReveal';
 
 const services = [
   {
-    icon: <Code2 size={22} className="text-electric-500" />,
+    icon: <Code2 size={22} className="text-electric-600" />,
     title: 'Product Development',
     desc: 'End-to-end SDLC from ideation to launch, scaling with your business.',
-    color: 'bg-electric-500/8',
+    color: 'bg-electric-500/10',
   },
   {
-    icon: <Users size={22} className="text-purple-500" />,
+    icon: <Users size={22} className="text-electric-500" />,
     title: 'IT Staffing',
     desc: 'Agile, pre-vetted tech talent matched to your exact project needs.',
-    color: 'bg-purple-500/8',
+    color: 'bg-electric-500/10',
   },
   {
-    icon: <TestTube2 size={22} className="text-emerald-500" />,
+    icon: <TestTube2 size={22} className="text-electric-600" />,
     title: 'QA & Testing',
     desc: '20+ years of experience ensuring quality before it reaches users.',
-    color: 'bg-emerald-500/8',
+    color: 'bg-electric-500/10',
   },
   {
-    icon: <Globe size={22} className="text-sky-500" />,
+    icon: <Globe size={22} className="text-electric-500" />,
     title: 'Web Design',
     desc: 'Responsive, accessible, and visually compelling digital experiences.',
-    color: 'bg-sky-500/8',
+    color: 'bg-electric-500/10',
   },
   {
-    icon: <Bot size={22} className="text-amber-500" />,
+    icon: <Bot size={22} className="text-electric-600" />,
     title: 'Automation',
     desc: 'Gen AI-integrated frameworks that let any team automate with ease.',
-    color: 'bg-amber-500/8',
+    color: 'bg-electric-500/10',
   },
 ];
 
@@ -53,12 +53,12 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center bg-navy-900 overflow-hidden">
+      <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden">
         {/* Background elements */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-electric-500/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-electric-500/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-electric-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-0">
           <div className="max-w-3xl">
@@ -69,12 +69,12 @@ export default function Home() {
 
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.08] mb-6 animate-fade-up">
               Empowering Your{' '}
-              <span className="bg-gradient-to-r from-electric-400 via-purple-400 to-electric-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-electric-100 to-electric-300 bg-clip-text text-transparent">
                 Digital Future
               </span>
             </h1>
 
-            <p className="text-white/55 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            <p className="text-white/70 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl animate-fade-up" style={{ animationDelay: '0.1s' }}>
               Unleashing the potential of technology for your business. From software development to AI-powered automation — we build the tools that move you forward.
             </p>
 
@@ -82,7 +82,7 @@ export default function Home() {
               <Link to="/contact" className="btn-primary text-base py-3.5 px-8">
                 Get Started <ArrowRight size={18} />
               </Link>
-              <Link to="/services" className="inline-flex items-center gap-2 border-2 border-white/20 text-white hover:border-electric-400 hover:text-electric-400 font-semibold px-8 py-3.5 rounded-xl transition-all duration-200">
+              <Link to="/services" className="inline-flex items-center gap-2 border-2 border-white/30 text-white hover:border-white hover:bg-white/10 font-semibold px-8 py-3.5 rounded-full transition-all duration-200">
                 Our Services <ChevronRight size={18} />
               </Link>
             </div>
@@ -173,7 +173,7 @@ export default function Home() {
             ))}
 
             {/* CTA card */}
-            <div className="bg-gradient-to-br from-navy-900 to-navy-800 rounded-2xl p-6 flex flex-col justify-between reveal sm:col-span-2 lg:col-span-1" style={{ transitionDelay: `${services.length * 60}ms` }}>
+            <div className="bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-6 flex flex-col justify-between reveal sm:col-span-2 lg:col-span-1" style={{ transitionDelay: `${services.length * 60}ms` }}>
               <div>
                 <div className="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center mb-4">
                   <Star size={20} className="text-gold-400 fill-gold-400" />
@@ -183,7 +183,7 @@ export default function Home() {
                   Every great product starts with a conversation. Let's talk about yours.
                 </p>
               </div>
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-electric-300 transition-colors w-fit">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-electric-300 transition-colors w-fit">
                 Contact Us <ArrowRight size={14} />
               </Link>
             </div>
@@ -210,14 +210,14 @@ export default function Home() {
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-4 leading-tight">
                   Introducing{' '}
-                  <span className="bg-gradient-to-r from-electric-400 to-purple-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-electric-400 to-electric-200 bg-clip-text text-transparent">
                     ServEaso
                   </span>
                 </h2>
                 <p className="text-white/60 leading-relaxed mb-8">
                   A location-based home care service application launching in the Indian market. Connecting busy professionals, parents, and the elderly with trusted, vetted household help — maids, nannies, cooks, elderly care, and more.
                 </p>
-                <Link to="/product" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-xl hover:bg-electric-300 transition-colors">
+                <Link to="/product" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-full hover:bg-electric-300 transition-colors">
                   Explore ServEaso <ArrowRight size={16} />
                 </Link>
               </div>
@@ -226,7 +226,7 @@ export default function Home() {
                 {['Maids', 'Baby Caregivers', 'Elderly Care', 'Cooks', 'Drivers', 'Patient Care'].map((item, i) => (
                   <div
                     key={item}
-                    className="bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-white/70 text-sm font-medium hover:bg-white/15 hover:text-white transition-all duration-200 cursor-default"
+                    className="bg-white/8 border border-white/10 rounded-2xl px-4 py-3 text-white/70 text-sm font-medium hover:bg-white/15 hover:text-white transition-all duration-200 cursor-default"
                   >
                     {item}
                   </div>
