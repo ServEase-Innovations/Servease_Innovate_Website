@@ -58,11 +58,11 @@ export default {
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },
-      backgroundImage: {
-        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A8DE8' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-        'hero-gradient': 'linear-gradient(125deg, #06205C 0%, #0B6FD1 38%, #43A8F2 65%, #8FD4B1 100%)',
-        'cta-gradient': 'linear-gradient(120deg, #06205C 0%, #0E3C9B 100%)',
-      },
+      // backgroundImage: {
+      //   'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A8DE8' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+      //   'hero-gradient': 'linear-gradient(125deg, #06205C 0%, #0B6FD1 38%, #43A8F2 65%, #8FD4B1 100%)',
+      //   'cta-gradient': 'linear-gradient(120deg, #06205C 0%, #0E3C9B 100%)',
+      // },
     },
   },
   plugins: [],
