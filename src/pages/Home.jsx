@@ -571,13 +571,13 @@ export default function Home() {
               dotRadius={2}
               dotSpacing={16}
               bulgeStrength={80}
-              glowRadius={200}
+              glowRadius={100}
               sparkle={true}
               waveAmplitude={2}
-              glowColor="#c2d5f5"
+              glowColor="#689e89"
               gradientFrom="rgba(59, 130, 246, 0.4)"
-              gradientTo="rgba(139, 92, 246, 0.2)"
-              cursorRadius={400}
+              gradientTo="rgb(0, 255, 98)"
+              cursorRadius={200}
             />
           </div>
 
@@ -664,6 +664,7 @@ export default function Home() {
         {/* Wave divider */}
         <svg className="gs-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none">
           <path d="M0,48 L0,24 C240,0 480,48 720,24 C960,0 1200,48 1440,24 L1440,48 Z" fill="#082f49" />
+
         </svg>
 
         {/* ══ ABOUT ═══════════════════════════════════════════════════ */}

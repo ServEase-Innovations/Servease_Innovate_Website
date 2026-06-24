@@ -57,8 +57,8 @@ export default function WhoWeAre() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="bg-navy-900 pt-32 pb-20 relative overflow-hidden">
+      {/* Hero - Updated background color */}
+      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
         <div className="absolute inset-0 bg-grid-pattern opacity-30" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

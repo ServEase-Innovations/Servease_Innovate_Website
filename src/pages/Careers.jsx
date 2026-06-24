@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  Briefcase, MapPin, Mail, ChevronDown, ChevronUp,
-  CheckCircle2, Star, ArrowRight, Users2, Zap, Clock
+  Briefcase, MapPin, Mail, ChevronDown,
+  CheckCircle2, Star, Users2, Zap, Clock
 } from 'lucide-react';
 import { useScrollRevealAll } from '../hooks/useScrollReveal';
+import SplitText from '../components/SplitText';
 
 const responsibilities = [
   'Develop and execute marketing strategies aligned with overall business objectives.',
@@ -67,7 +67,7 @@ function JobCard({ job }) {
             className="flex items-center gap-2 text-sm font-medium text-electric-500 hover:text-electric-400 transition-colors shrink-0"
           >
             {expanded ? 'Show Less' : 'Show More'}
-            {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {expanded ? <ChevronDown size={16} /> : <ChevronDown size={16} />}
           </button>
         </div>
 
@@ -145,11 +145,9 @@ export default function Careers() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="bg-navy-900 pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-200/20 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      {/* Hero — plain #082f49 background, no animation */}
+      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="section-label text-electric-400">
             <Briefcase size={12} /> Careers
           </span>
@@ -184,16 +182,38 @@ export default function Careers() {
       {/* Open Roles */}
       <section className="bg-gray-50 py-20 lg:py-28">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 reveal">
+          <div className="mb-12">
             <span className="section-label">
               <Briefcase size={12} /> Open Positions
             </span>
-            <h2 className="section-title mb-4">
-              Find your <span className="gradient-text">next opportunity</span>
-            </h2>
-            <p className="text-gray-500">
-              We're a growing team with ambitions to transform everyday lives. Here's where you fit in.
-            </p>
+            <SplitText
+              text="Find your next opportunity"
+              tag="h2"
+              className="section-title mb-4"
+              delay={40}
+              duration={0.7}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 36 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-60px"
+              textAlign="left"
+            />
+            <SplitText
+              text="We're a growing team with ambitions to transform everyday lives. Here's where you fit in."
+              tag="p"
+              className="text-gray-500"
+              delay={18}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-40px"
+              textAlign="left"
+            />
           </div>
 
           <div className="space-y-6">
@@ -206,10 +226,34 @@ export default function Careers() {
           <div className="mt-10 bg-gradient-to-br from-navy-900 to-navy-800 rounded-2xl p-6 lg:p-8 relative overflow-hidden reveal">
             <div className="absolute top-0 right-0 w-48 h-48 bg-electric-500/10 rounded-full blur-2xl" />
             <div className="relative">
-              <h3 className="font-display font-semibold text-white text-lg mb-2">Don't see a role that fits?</h3>
-              <p className="text-white/55 text-sm mb-5 max-w-md">
-                We're always looking for talented people. Send us your resume and tell us where you'd add value.
-              </p>
+              <SplitText
+                text="Don't see a role that fits?"
+                tag="h3"
+                className="font-display font-semibold text-white text-lg mb-2"
+                delay={35}
+                duration={0.6}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 24 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-40px"
+                textAlign="left"
+              />
+              <SplitText
+                text="We're always looking for talented people. Send us your resume and tell us where you'd add value."
+                tag="p"
+                className="text-white/55 text-sm mb-5 max-w-md"
+                delay={14}
+                duration={0.55}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 18 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-40px"
+                textAlign="left"
+              />
               <a
                 href="mailto:hr@serveaseinnovation.com"
                 className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-electric-300 transition-colors"
