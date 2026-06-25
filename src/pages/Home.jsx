@@ -686,12 +686,16 @@ export default function Home() {
               dotRadius={2}
               dotSpacing={16}
               bulgeStrength={80}
-              glowRadius={100}
+              glowRadius={200}
               sparkle={true}
               waveAmplitude={4}
               glowColor="#723fe9"
               gradientFrom="rgba(199, 255, 252, 0.4)"
               gradientTo="rgba(0, 248, 227, 0.2)"
+              waveAmplitude={2}
+              glowColor="#c2d5f5"
+              gradientFrom="rgba(59, 130, 246, 0.4)"
+              gradientTo="rgba(139, 92, 246, 0.2)"
               cursorRadius={400}
             />
           </div>
