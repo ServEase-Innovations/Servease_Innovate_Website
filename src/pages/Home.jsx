@@ -173,12 +173,17 @@ export default function Home() {
   const servicesRef   = useRef(null);
   const productRef    = useRef(null);
   const ctaRef        = useRef(null);
+  /* Bridge elements between sections */
+  const bridge1Ref    = useRef(null); // hero → about
+  const bridge2Ref    = useRef(null); // about → services
+  const bridge3Ref    = useRef(null); // services → product
+  const bridge4Ref    = useRef(null); // product → cta
 
   /* ── GSAP animations ── */
   useGSAP(({ gsap, ScrollTrigger, prefersReduced }) => {
     if (prefersReduced) return;
 
-    /* Helper: fade-up stagger for a list of elements */
+    /* Helper: fade-up stagger */
     const fadeUp = (targets, trigger, { delay = 0, stagger = 0.08, y = 36, duration = 0.75 } = {}) => {
       gsap.fromTo(
         targets,
@@ -197,7 +202,6 @@ export default function Home() {
 
     /* ── HERO entrance ── */
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
     heroTl
       .fromTo(heroBadgeRef.current,  { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, 0.3)
       .fromTo(heroH1Ref.current,     { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8 }, 0.5)
@@ -205,13 +209,13 @@ export default function Home() {
       .fromTo(heroCTARef.current,    { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0.9)
       .fromTo(heroChipsRef.current,  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 1.05);
 
-    /* Floating badges staggered */
+    /* Floating badges */
     gsap.fromTo('.gs-badge',
       { opacity: 0, x: 24 },
       { opacity: 1, x: 0, duration: 0.6, stagger: 0.18, ease: 'power2.out', delay: 1.1 }
     );
 
-    /* ── ORB parallax on scroll ── */
+    /* ── ORB parallax ── */
     if (orb1Ref.current) {
       gsap.to(orb1Ref.current, {
         y: -120,
@@ -227,7 +231,26 @@ export default function Home() {
       });
     }
 
-    /* ── ABOUT section ── */
+    /* ── Hero → About section bridge ──
+       As the hero scrolls away, fade the wave divider down
+       and let the about section rise up with a subtle overlap */
+    if (bridge1Ref.current) {
+      gsap.fromTo(bridge1Ref.current,
+        { scaleY: 1.5, transformOrigin: 'top center' },
+        {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'bottom 80%',
+            end: 'bottom 20%',
+            scrub: 1,
+          },
+        }
+      );
+    }
+
+    /* ── ABOUT section — slide in from sides ── */
     if (aboutRef.current) {
       const left  = aboutRef.current.querySelector('.gs-about-left');
       const right = aboutRef.current.querySelector('.gs-about-right');
@@ -236,10 +259,8 @@ export default function Home() {
 
       if (left) gsap.fromTo(left,  { opacity: 0, x: -48 }, { opacity: 1, x: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: left,  start: 'top 80%', once: true } });
       if (right) gsap.fromTo(right, { opacity: 0, x:  48 }, { opacity: 1, x: 0, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: right, start: 'top 80%', once: true } });
-
       if (items.length) fadeUp(items, aboutRef.current, { stagger: 0.07, y: 20 });
 
-      /* Stat cards scale-up with stagger */
       if (statCards.length) {
         gsap.fromTo(statCards,
           { opacity: 0, scale: 0.88, y: 24 },
@@ -250,6 +271,34 @@ export default function Home() {
           }
         );
       }
+
+      /* Subtle background shift on scroll through about */
+      gsap.fromTo(aboutRef.current,
+        { backgroundPosition: '0% 0%' },
+        {
+          backgroundPosition: '0% 30%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: aboutRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        }
+      );
+    }
+
+    /* ── About → Services bridge ── */
+    if (bridge2Ref.current) {
+      gsap.fromTo(bridge2Ref.current,
+        { opacity: 0, scaleX: 0.95 },
+        {
+          opacity: 1,
+          scaleX: 1,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: bridge2Ref.current, start: 'top 90%', once: true },
+        }
+      );
     }
 
     /* ── SERVICES section ── */
@@ -295,7 +344,6 @@ export default function Home() {
         );
       }
 
-      /* Subtle parallax on the decorative orb inside product teaser */
       const innerOrb = productRef.current.querySelector('.gs-product-orb');
       if (innerOrb) {
         gsap.to(innerOrb, {
@@ -303,6 +351,19 @@ export default function Home() {
           ease: 'none',
           scrollTrigger: { trigger: productRef.current, start: 'top bottom', end: 'bottom top', scrub: 2 },
         });
+      }
+
+      /* Product card entrance — scale up from slightly small */
+      const productCard = productRef.current.querySelector('.product-card-inner');
+      if (productCard) {
+        gsap.fromTo(productCard,
+          { opacity: 0, scale: 0.97, y: 32 },
+          {
+            opacity: 1, scale: 1, y: 0,
+            duration: 0.9, ease: 'power3.out',
+            scrollTrigger: { trigger: productCard, start: 'top 85%', once: true },
+          }
+        );
       }
     }
 
@@ -315,7 +376,6 @@ export default function Home() {
 
       if (content) fadeUp([content], ctaRef.current, { y: 36 });
 
-      /* Pulsing rings re-implemented via GSAP for more control */
       if (ring1 && ring2) {
         gsap.fromTo([ring1, ring2],
           { scale: 1, opacity: 0.15 },
@@ -338,17 +398,52 @@ export default function Home() {
           }
         );
       }
+
+      /* CTA section background zoom — creates depth as you scroll into it */
+      gsap.fromTo(ctaRef.current,
+        { backgroundSize: '105%' },
+        {
+          backgroundSize: '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: 'top bottom',
+            end: 'top 40%',
+            scrub: 1,
+          },
+        }
+      );
     }
 
-    /* ── Wave divider parallax ── */
-    const wave = document.querySelector('.gs-wave');
-    if (wave) {
+    /* ── Wave dividers parallax ── */
+    document.querySelectorAll('.gs-wave').forEach((wave) => {
       gsap.to(wave, {
         y: -16,
         ease: 'none',
         scrollTrigger: { trigger: wave, start: 'top bottom', end: 'bottom top', scrub: 1 },
       });
-    }
+    });
+
+    /* ── Section-to-section continuous flow ──
+       Each section subtly rises as it enters, creating a layered
+       "pages coming into view" effect.                           */
+    [aboutRef, servicesRef, productRef, ctaRef].forEach((secRef, i) => {
+      if (!secRef.current) return;
+      // Only set up if not already animated by specific handlers
+      ScrollTrigger.create({
+        trigger: secRef.current,
+        start: 'top 98%',
+        once: true,
+        onEnter: () => {
+          if (secRef.current.dataset.sectionEntered) return;
+          secRef.current.dataset.sectionEntered = 'true';
+          gsap.fromTo(secRef.current,
+            { y: 8 },
+            { y: 0, duration: 0.6, ease: 'power2.out', clearProps: 'transform' }
+          );
+        },
+      });
+    });
 
   }, []);
 
@@ -498,35 +593,27 @@ export default function Home() {
           z-index: 1;
         }
 
-        /* ── Custom background color ── */
-        .bg-custom {
-          background-color: #082f49;
-        }
+        /* ── Background color ── */
+        .bg-custom { background-color: #082f49; }
 
-        /* ── Custom text colors for dark background ── */
-        .text-custom-primary {
-          color: rgba(255, 255, 255, 0.9);
-        }
-        .text-custom-secondary {
-          color: rgba(255, 255, 255, 0.6);
-        }
-        .text-custom-muted {
-          color: rgba(255, 255, 255, 0.4);
-        }
+        /* ── Custom text colors ── */
+        .text-custom-primary  { color: rgba(255,255,255,0.9); }
+        .text-custom-secondary{ color: rgba(255,255,255,0.6); }
+        .text-custom-muted    { color: rgba(255,255,255,0.4); }
 
         .section-label-custom {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.08);
           padding: 0.375rem 1rem;
           border-radius: 9999px;
           font-size: 0.75rem;
           font-weight: 600;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.5);
+          color: rgba(255,255,255,0.5);
           margin-bottom: 1rem;
         }
 
@@ -538,11 +625,8 @@ export default function Home() {
           color: white;
           margin-bottom: 1rem;
         }
-
         @media (min-width: 768px) {
-          .section-title-custom {
-            font-size: 2.75rem;
-          }
+          .section-title-custom { font-size: 2.75rem; }
         }
 
         .gradient-text-custom {
@@ -550,6 +634,38 @@ export default function Home() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+        }
+
+        /* ── Seamless section connectors ──────────────────────────
+           The key technique: sections share the same bg-custom
+           colour, negative margins close gaps, and subtle shadow
+           depth creates the layered / overlapping effect.        */
+        .section-connector {
+          position: relative;
+          z-index: 2;
+          margin-top: -2px;   /* kill hairline rendering gap */
+        }
+
+        /* Soft top shadow on sections entering from below */
+        .section-enter-shadow::before {
+          content: '';
+          position: absolute;
+          top: -1px;
+          left: 0;
+          right: 0;
+          height: 60px;
+          background: linear-gradient(to bottom, rgba(8,47,73,0.55), transparent);
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        /* ── Ambient glow behind section headers ── */
+        .section-glow {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(90px);
+          pointer-events: none;
+          opacity: 0.08;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -561,34 +677,30 @@ export default function Home() {
       <div className="min-h-screen bg-custom">
 
         {/* ══ HERO ═══════════════════════════════════════════════════ */}
-        <section 
-          ref={heroRef} 
-          className="relative min-h-screen flex items-center overflow-hidden bg-custom"
+        <section
+          ref={heroRef}
+          className="relative min-h-screen flex items-center overflow-hidden bg-custom hero-skip-transition"
         >
-          {/* DotField Background - Visible and interactive */}
           <div className="hero-dotfield-wrapper">
             <DotField
               dotRadius={2}
               dotSpacing={16}
               bulgeStrength={80}
-              glowRadius={100}
+              glowRadius={200}
               sparkle={true}
               waveAmplitude={2}
-              glowColor="#689e89"
+              glowColor="#c2d5f5"
               gradientFrom="rgba(59, 130, 246, 0.4)"
-              gradientTo="rgb(0, 255, 98)"
-              cursorRadius={200}
+              gradientTo="rgba(139, 92, 246, 0.2)"
+              cursorRadius={400}
             />
           </div>
 
-          {/* Grid overlay */}
           <div className="absolute inset-0 bg-grid-pattern opacity-10 z-0 pointer-events-none" />
 
-          {/* Orbs — refs for parallax */}
           <div ref={orb1Ref} className="hero-mesh orb-drift w-[500px] h-[500px] bg-white/5 top-1/4 -left-40 z-0" />
           <div ref={orb2Ref} className="hero-mesh w-[400px] h-[400px] bg-electric-300/10 bottom-1/4 -right-24 z-0" />
 
-          {/* Floating proof badges */}
           <div className="hidden lg:block absolute right-[8%] top-[28%] z-10">
             <FloatingBadge icon={<Award size={16} />} label="Combined Experience" value="30+ Years" delay="0.8s" />
           </div>
@@ -599,10 +711,8 @@ export default function Home() {
             <FloatingBadge icon={<Zap size={16} className="fill-current" />} label="Founded" value="2024" delay="1.2s" />
           </div>
 
-          {/* Hero content */}
           <div className="hero-content relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-0">
             <div className="max-w-3xl">
-
               <div ref={heroBadgeRef} className="gs-hero-hidden inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
                 <Zap size={12} className="text-electric-400 fill-electric-400" />
                 <span className="text-white/70 text-xs font-medium tracking-wide">ServEase Innovation & Technology</span>
@@ -653,7 +763,6 @@ export default function Home() {
             <Ticker />
           </div>
 
-          {/* Scroll indicator */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 scroll-bob z-10">
             <div className="w-5 h-8 border border-white/20 rounded-full flex justify-center pt-1.5">
               <div className="w-0.5 h-2 bg-white/40 rounded-full" />
@@ -661,14 +770,20 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Wave divider */}
-        <svg className="gs-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none">
-          <path d="M0,48 L0,24 C240,0 480,48 720,24 C960,0 1200,48 1440,24 L1440,48 Z" fill="#082f49" />
-
-        </svg>
+        {/* ── Bridge 1: Hero → About ──
+            Wave SVG that visually stitches the hero into the about
+            section — both are bg-custom so it's seamless.        */}
+        <div ref={bridge1Ref} className="gs-wave relative z-10 -mb-1" style={{ backgroundColor: '#082f49' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none" style={{ display: 'block', lineHeight: 0 }}>
+            <path d="M0,48 L0,24 C240,0 480,48 720,24 C960,0 1200,48 1440,24 L1440,48 Z" fill="#082f49" />
+          </svg>
+        </div>
 
         {/* ══ ABOUT ═══════════════════════════════════════════════════ */}
-        <section ref={aboutRef} className="bg-custom py-20 lg:py-28 -mt-1">
+        <section ref={aboutRef} className="bg-custom py-20 lg:py-28 section-connector">
+          {/* Ambient glow */}
+          <div className="section-glow w-96 h-96 bg-electric-400 absolute top-0 right-1/4" />
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -704,7 +819,6 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Stats grid */}
               <div className="gs-about-right gs-stats-grid grid grid-cols-2 gap-4" style={{ opacity: 0 }}>
                 {stats.map(({ value, suffix, label, icon }) => (
                   <div key={label} className="gs-stat stat-card">
@@ -720,8 +834,11 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Bridge 2: About → Services (thin luminous line) ── */}
+        <div ref={bridge2Ref} className="section-connector" style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(67,168,242,0.3), transparent)', opacity: 0 }} />
+
         {/* ══ SERVICES ════════════════════════════════════════════════ */}
-        <section ref={servicesRef} className="bg-custom py-20 lg:py-28 relative overflow-hidden">
+        <section ref={servicesRef} className="bg-custom py-20 lg:py-28 relative overflow-hidden section-connector">
           <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -752,7 +869,6 @@ export default function Home() {
                 </SpotlightCard>
               ))}
 
-              {/* Dark CTA card */}
               <div className="gs-service-card bg-white/5 backdrop-blur-sm rounded-3xl p-6 flex flex-col justify-between sm:col-span-2 lg:col-span-1 relative overflow-hidden group border border-white/5" style={{ opacity: 0 }}>
                 <div className="absolute top-0 right-0 w-40 h-40 bg-electric-500/10 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-electric-300/5 rounded-full blur-xl pointer-events-none" />
@@ -780,16 +896,18 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Bridge 3: Services → Product ── */}
+        <div ref={bridge3Ref} className="section-connector" style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(67,168,242,0.15), transparent)' }} />
+
         {/* ══ PRODUCT TEASER ══════════════════════════════════════════ */}
-        <section ref={productRef} className="bg-custom py-20 lg:py-28">
+        <section ref={productRef} className="bg-custom py-20 lg:py-28 section-connector">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-br from-navy-900/80 via-navy-800/60 to-navy-900/80 rounded-3xl overflow-hidden relative border border-white/5">
+            <div className="product-card-inner bg-gradient-to-br from-navy-900/80 via-navy-800/60 to-navy-900/80 rounded-3xl overflow-hidden relative border border-white/5">
               <div className="absolute inset-0 bg-grid-pattern opacity-20" />
               <div className="gs-product-orb absolute top-0 right-0 w-80 h-80 bg-electric-500/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-electric-300/8 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative p-10 lg:p-16 grid lg:grid-cols-2 gap-12 items-center">
-
                 <div className="gs-product-copy" style={{ opacity: 0 }}>
                   <div className="inline-flex items-center gap-2 bg-electric-500/15 border border-electric-500/20 rounded-full px-3 py-1.5 mb-5">
                     <Sparkles size={12} className="text-electric-400" />
@@ -822,7 +940,6 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Chips */}
                 <div className="grid grid-cols-2 gap-3">
                   {productChips.map(({ label, icon }, i) => (
                     <div
@@ -840,13 +957,19 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Bridge 4: Product → CTA ── */}
+        <div ref={bridge4Ref} className="gs-wave section-connector" style={{ background: '#082f49' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 32" preserveAspectRatio="none" style={{ display: 'block', lineHeight: 0 }}>
+            <path d="M0,32 L0,16 C360,32 720,0 1080,16 C1260,24 1380,20 1440,16 L1440,32 Z" fill="#082f49" />
+          </svg>
+        </div>
+
         {/* ══ CTA ═════════════════════════════════════════════════════ */}
-        <section ref={ctaRef} className="bg-custom py-20 lg:py-28 relative overflow-hidden">
+        <section ref={ctaRef} className="bg-custom py-20 lg:py-28 relative overflow-hidden section-connector">
           <div className="absolute inset-0 bg-grid-pattern opacity-50" />
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="gs-cta-content" style={{ opacity: 0 }}>
-              {/* Pulse rings */}
               <div className="relative inline-flex items-center justify-center mb-8">
                 <div className="gs-ring-1 cta-ring" style={{ opacity: 0 }} />
                 <div className="gs-ring-2 cta-ring" style={{ opacity: 0 }} />

@@ -1,140 +1,105 @@
-import { useRef, useEffect, useState } from 'react';
-
 /**
- * SplitText — scroll-triggered word/char/line animation via GSAP 3.13+.
- * GSAP 3.13+ is required: SplitText became free in that release.
- * Loads lazily from esm.sh to match the project's existing GSAP pattern.
+ * SplitText.jsx
+ * ─────────────────────────────────────────────────────────────
+ * Splits text into words (or chars) and stagger-animates them
+ * into view when the element enters the viewport.
+ *
+ * Uses GSAP + IntersectionObserver (no ScrollTrigger dep needed).
+ *
+ * Props
+ *   text        – string to render
+ *   tag         – wrapper element type (default: 'p')
+ *   className   – classes forwarded to the wrapper
+ *   splitType   – 'words' | 'chars'  (default: 'words')
+ *   delay       – per-item stagger in ms (default: 30)
+ *   duration    – tween duration in seconds (default: 0.6)
+ *   ease        – GSAP ease string (default: 'power3.out')
+ *   from        – GSAP fromTo "from" vars (default: opacity 0, y 20)
+ *   to          – GSAP fromTo "to"   vars (default: opacity 1, y 0)
+ *   threshold   – IntersectionObserver threshold (default: 0.1)
+ *   rootMargin  – IntersectionObserver rootMargin (default: '-40px')
+ *   textAlign   – CSS text-align (default: 'inherit')
  */
+import { useEffect, useRef } from 'react';
 
-let gsapModules = null;
-async function loadGSAP() {
-  if (gsapModules) return gsapModules;
-  const [{ gsap }, { ScrollTrigger }, { SplitText: GSAPSplitText }] = await Promise.all([
-    import('https://esm.sh/gsap@3.13.0'),
-    import('https://esm.sh/gsap@3.13.0/ScrollTrigger'),
-    import('https://esm.sh/gsap@3.13.0/SplitText'),
-  ]);
-  gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
-  gsapModules = { gsap, ScrollTrigger, GSAPSplitText };
-  return gsapModules;
+let _gsap = null;
+async function getGSAP() {
+  if (_gsap) return _gsap;
+  const { gsap } = await import('https://esm.sh/gsap@3.12.5');
+  _gsap = gsap;
+  return gsap;
 }
 
-const SplitText = ({
-  text,
+export default function SplitText({
+  text = '',
+  tag: Tag = 'p',
   className = '',
-  delay = 50,
-  duration = 1.25,
+  splitType = 'words',
+  delay = 30,
+  duration = 0.6,
   ease = 'power3.out',
-  splitType = 'chars',
-  from = { opacity: 0, y: 40 },
-  to = { opacity: 1, y: 0 },
+  from = { opacity: 0, y: 20 },
+  to   = { opacity: 1, y: 0  },
   threshold = 0.1,
-  rootMargin = '-100px',
-  textAlign = 'left',
-  tag = 'p',
-  onLetterAnimationComplete,
-}) => {
-  const ref = useRef(null);
-  const onCompleteRef = useRef(onLetterAnimationComplete);
+  rootMargin = '-40px',
+  textAlign = 'inherit',
+}) {
+  const wrapRef = useRef(null);
+  const animated = useRef(false);
 
   useEffect(() => {
-    onCompleteRef.current = onLetterAnimationComplete;
-  }, [onLetterAnimationComplete]);
+    const wrap = wrapRef.current;
+    if (!wrap || animated.current) return;
 
-  useEffect(() => {
-    if (!ref.current || !text) return;
+    // Split into spans
+    const raw   = text.trim();
+    const units = splitType === 'chars'
+      ? raw.split('')
+      : raw.split(/\s+/);
 
-    const el = ref.current;
-    let cancelled = false;
-    let splitInstance = null;
+    // Rebuild DOM
+    wrap.innerHTML = units
+      .map((u) =>
+        `<span class="split-unit" style="display:inline-block;overflow:hidden;"><span class="split-inner" style="display:inline-block;">${u === ' ' ? '&nbsp;' : u}</span></span>`
+      )
+      .join(splitType === 'chars' ? '' : '&nbsp;');
 
-    // Convert rootMargin offset into a ScrollTrigger start string
-    const startPct = (1 - threshold) * 100;
-    const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
-    const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-    const marginUnit  = marginMatch ? (marginMatch[2] || 'px') : 'px';
-    const offset =
-      marginValue === 0 ? '' :
-      marginValue < 0   ? ` -=${Math.abs(marginValue)}${marginUnit}` :
-                          ` +=${marginValue}${marginUnit}`;
-    const startStr = `top ${startPct}%${offset}`;
+    const inners = wrap.querySelectorAll('.split-inner');
 
-    async function init() {
-      const { gsap, ScrollTrigger, GSAPSplitText } = await loadGSAP();
-      if (cancelled) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || animated.current) return;
+        animated.current = true;
+        observer.disconnect();
 
-      // Revert any prior split on this element
-      if (el._splitInstance) {
-        try { el._splitInstance.revert(); } catch (_) {}
-        el._splitInstance = null;
-      }
+        getGSAP().then((gsap) => {
+          gsap.fromTo(
+            inners,
+            { ...from },
+            {
+              ...to,
+              duration,
+              ease,
+              stagger: delay / 1000,
+            }
+          );
+        });
+      },
+      { threshold, rootMargin }
+    );
 
-      // Wait for fonts so line-splitting is accurate
-      await document.fonts.ready;
-      if (cancelled) return;
-
-      splitInstance = GSAPSplitText.create(el, {
-        type: splitType,
-        autoSplit: true,
-        onSplit(self) {
-          // Pick the finest-grained targets available
-          const targets =
-            (splitType.includes('chars') && self.chars?.length)  ? self.chars  :
-            (splitType.includes('words') && self.words?.length)  ? self.words  :
-            (splitType.includes('lines') && self.lines?.length)  ? self.lines  :
-            self.chars || self.words || self.lines || [];
-
-          if (!targets.length) return;
-
-          return gsap.fromTo(targets, { ...from }, {
-            ...to,
-            duration,
-            ease,
-            stagger: delay / 1000,
-            force3D: true,
-            scrollTrigger: {
-              trigger: el,
-              start: startStr,
-              once: true,
-            },
-            onComplete() {
-              onCompleteRef.current?.();
-            },
-          });
-        },
-      });
-
-      el._splitInstance = splitInstance;
-    }
-
-    init();
-
-    return () => {
-      cancelled = true;
-      if (splitInstance) {
-        try { splitInstance.revert(); } catch (_) {}
-      }
-      if (el._splitInstance) {
-        try { el._splitInstance.revert(); } catch (_) {}
-        el._splitInstance = null;
-      }
-    };
+    observer.observe(wrap);
+    return () => observer.disconnect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, delay, duration, ease, splitType,
-      JSON.stringify(from), JSON.stringify(to),
-      threshold, rootMargin]);
-
-  const Tag = tag || 'p';
+  }, []);
 
   return (
     <Tag
-      ref={ref}
+      ref={wrapRef}
       className={className}
       style={{ textAlign }}
     >
       {text}
     </Tag>
   );
-};
-
-export default SplitText;
+}

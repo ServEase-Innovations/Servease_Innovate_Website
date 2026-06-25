@@ -39,7 +39,6 @@ function JobCard({ job }) {
   return (
     <div className="card reveal overflow-hidden">
       <div className="p-6 lg:p-8">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-5">
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -67,14 +66,16 @@ function JobCard({ job }) {
             className="flex items-center gap-2 text-sm font-medium text-electric-500 hover:text-electric-400 transition-colors shrink-0"
           >
             {expanded ? 'Show Less' : 'Show More'}
-            {expanded ? <ChevronDown size={16} /> : <ChevronDown size={16} />}
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
+            />
           </button>
         </div>
 
         <p className="text-gray-500 text-sm leading-relaxed">{job.summary}</p>
       </div>
 
-      {/* Expanded content */}
       {expanded && (
         <div className="border-t border-gray-100 p-6 lg:p-8 bg-gray-50/50">
           <div className="grid lg:grid-cols-2 gap-8">
@@ -145,8 +146,13 @@ export default function Careers() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — plain #082f49 background, no animation */}
+      {/* Hero — #082f49 seamless with home */}
       <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
+        {/* Glow accent */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <span className="section-label text-electric-400">
             <Briefcase size={12} /> Careers
@@ -162,6 +168,13 @@ export default function Careers() {
           </p>
         </div>
       </section>
+
+      {/* Seamless wave from hero into white */}
+      <div style={{ backgroundColor: '#082f49', lineHeight: 0, display: 'block' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 36" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
+          <path d="M0,36 L0,18 C360,36 720,0 1080,18 C1260,27 1380,22 1440,18 L1440,36 Z" fill="#ffffff" />
+        </svg>
+      </div>
 
       {/* Perks */}
       <section className="bg-white py-14 border-b border-gray-100">
