@@ -24,10 +24,8 @@ export default function InfiniteScrollTags() {
 
       {/* Row 1: Continuous scrolling left */}
       <div className="flex w-max">
-        <motion.div 
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="flex gap-4 pr-4"
+        <div 
+          className="flex gap-4 pr-4 animate-marquee-left"
         >
           {infiniteTags.map((tag, i) => (
             <div 
@@ -40,15 +38,13 @@ export default function InfiniteScrollTags() {
               <span className="font-semibold text-brand-900 dark:text-white whitespace-nowrap">{tag.label}</span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Row 2: Continuous scrolling right */}
       <div className="flex w-max">
-        <motion.div 
-          animate={{ x: ["-50%", "0%"] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-          className="flex gap-4 pr-4"
+        <div 
+          className="flex gap-4 pr-4 animate-marquee-right"
         >
           {infiniteTags.reverse().map((tag, i) => (
             <div 
@@ -61,7 +57,7 @@ export default function InfiniteScrollTags() {
               <span className="font-semibold text-brand-900 dark:text-white whitespace-nowrap">{tag.label}</span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
       
     </div>
