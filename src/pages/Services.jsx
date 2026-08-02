@@ -1,242 +1,154 @@
-import { useEffect } from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Code2, Users, TestTube2, Globe, Bot, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  Code2, Users, TestTube2, Globe, Bot, ArrowRight,
-  CheckCircle2, Layers, Cpu, Rocket, Search, Palette,
-  Settings, GitBranch, Database
-} from 'lucide-react';
-import { useScrollRevealAll } from '../hooks/useScrollReveal';
 
-const sdlcStages = ['Ideation', 'Validation', 'Prototyping', 'Development', 'Testing', 'Launch', 'Improvement'];
-
-const automationFrameworks = [
-  { icon: <GitBranch size={14} />, label: 'TDD — JUnit, TestNG' },
-  { icon: <Layers size={14} />, label: 'BDD — Cucumber, JBehave, Serenity' },
-  { icon: <Cpu size={14} />, label: 'Page Object Model' },
-  { icon: <Settings size={14} />, label: 'Keyword Driven Framework' },
-  { icon: <Database size={14} />, label: 'Data Driven Framework' },
-  { icon: <Code2 size={14} />, label: 'API Framework' },
-  { icon: <Database size={14} />, label: 'Backend / ETL Framework' },
-  { icon: <Layers size={14} />, label: 'Hybrid Framework' },
-];
-
-const services = [
+const SERVICES = [
   {
     id: 'product-dev',
-    icon: <Code2 size={28} />,
-    color: 'from-electric-600 to-electric-400',
-    bg: 'bg-electric-500/8',
-    accent: 'text-electric-600',
-    label: 'Product Development',
-    headline: 'From idea to market — every step covered',
-    body: `Product development is the process of taking a product from an idea through its market release and beyond: planning, analysis, design, implementation, testing, deployment, and maintenance. Each stage plays a crucial role in ensuring the product meets the needs of its intended users and performs reliably.`,
-    steps: [
-      { name: 'Planning', desc: 'Define concept, identify target markets, establish resources and timelines.' },
-      { name: 'Analysis', desc: 'Gather detailed requirements, understand user needs, and align with stakeholders.' },
-      { name: 'Design', desc: 'Outline architecture, UI, and system components. Create prototypes for early feedback.' },
-      { name: 'Implementation', desc: 'Write code, integrate components, and build according to design specs.' },
-      { name: 'Testing', desc: 'Rigorous functional and non-functional testing to identify and fix issues.' },
-      { name: 'Deployment', desc: 'Launch to market with beta testing options before full-scale release.' },
-      { name: 'Maintenance', desc: 'Ongoing support, updates, and new features to keep your product competitive.' },
-    ],
+    title: 'Product Development',
+    subtitle: 'From Ideation to Scale',
+    description: 'We build resilient, scalable architectures that grow with your business. Full-stack expertise across modern web, mobile, and cloud-native environments.',
+    icon: <Code2 size={40} className="text-blue-400" />,
+    color: 'from-blue-600 to-blue-400',
+    bg: 'bg-accent-blue/100/10'
   },
   {
     id: 'it-staffing',
-    icon: <Users size={28} />,
-    color: 'from-electric-500 to-electric-300',
-    bg: 'bg-electric-500/8',
-    accent: 'text-electric-600',
-    label: 'IT Staffing',
-    headline: 'The right talent, exactly when you need it',
-    body: `IT staffing has become essential in today's competitive landscape. By partnering with us, businesses gain access to a pool of highly skilled professionals tailored to their specific needs — from temporary and contract positions to full-time placements and executive searches.`,
-    bullets: [
-      'Temporary, contract, and full-time placements',
-      'Scale workforce up or down by project requirements',
-      'Strategic long-term IT workforce planning',
-      'Consulting services beyond mere recruitment',
-      'Tech startups and enterprise solutions',
-    ],
+    title: 'IT Staffing & Talent',
+    subtitle: 'Elite Teams, On Demand',
+    description: 'Access our network of pre-vetted, top-tier engineers. We match the precise technical skills and cultural fit your project demands.',
+    icon: <Users size={40} className="text-purple-400" />,
+    color: 'from-purple-600 to-purple-400',
+    bg: 'bg-purple-50'
   },
   {
     id: 'qa-testing',
-    icon: <TestTube2 size={28} />,
-    color: 'from-electric-600 to-electric-400',
-    bg: 'bg-electric-500/8',
-    accent: 'text-electric-600',
-    label: 'QA & Testing Services',
-    headline: '20+ years ensuring nothing ships broken',
-    body: `Quality assurance, testing, and automation are integral to the SDLC — guaranteeing that products meet stringent quality and performance standards before reaching end-users. Our QA team covers functional, performance, security, and usability testing across the full spectrum.`,
-    bullets: [
-      'Functional & non-functional testing',
-      'Performance & load testing',
-      'Security and usability audits',
-      'Early-stage risk mitigation',
-      'Cost reduction through early defect detection',
-    ],
-  },
-  {
-    id: 'web-design',
-    icon: <Palette size={28} />,
-    color: 'from-electric-500 to-electric-300',
-    bg: 'bg-electric-500/8',
-    accent: 'text-electric-600',
-    label: 'Web Design',
-    headline: 'Beautiful, accessible, responsive experiences',
-    body: `Web design is a dynamic field that blends creativity with technology. We create visually appealing and functional websites that provide an optimal user experience — considering layout, color schemes, typography, and imagery to harmoniously convey your brand identity. Accessibility and responsive design are not afterthoughts; they're built in from the start.`,
-    bullets: [
-      'Responsive design for all devices',
-      'Accessibility-first approach (WCAG)',
-      'Brand identity integration',
-      'Performance-optimized builds',
-      'Dedicated design and development team',
-    ],
+    title: 'QA & Testing',
+    subtitle: 'Flawless Execution',
+    description: '20+ years of QA leadership. We implement rigorous automated and manual testing frameworks to ensure zero-defect releases.',
+    icon: <TestTube2 size={40} className="text-rose-400" />,
+    color: 'from-rose-600 to-rose-400',
+    bg: 'bg-rose-500/10'
   },
   {
     id: 'automation',
-    icon: <Bot size={28} />,
-    color: 'from-electric-600 to-electric-400',
-    bg: 'bg-electric-500/8',
-    accent: 'text-electric-600',
-    label: 'Automation Development',
-    headline: 'Gen AI-powered automation any team can run',
-    body: `Our award-winning codeless automation framework enables Business Analysts and Manual Testers to automate without writing code. We've integrated Gen AI to generate BDD feature files automatically, making automation faster and more accessible than ever.`,
-    frameworks: true,
+    title: 'AI & Automation',
+    subtitle: 'Work Smarter, Not Harder',
+    description: 'Integrate Gen-AI and Robotic Process Automation (RPA) into your workflows. Reduce overhead and eliminate repetitive manual tasks.',
+    icon: <Bot size={40} className="text-accent-orange" />,
+    color: 'from-emerald-600 to-emerald-400',
+    bg: 'bg-accent-orange/10'
   },
+  {
+    id: 'web-design',
+    title: 'Web Design',
+    subtitle: 'Digital Experiences that Convert',
+    description: 'Beautiful, responsive, and highly accessible user interfaces. We design with the end-user in mind to maximize engagement and conversion.',
+    icon: <Globe size={40} className="text-amber-400" />,
+    color: 'from-amber-600 to-amber-400',
+    bg: 'bg-amber-500/10'
+  }
 ];
 
 export default function Services() {
-  useScrollRevealAll();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
   return (
-    <div className="min-h-screen">
-      {/* Hero - Updated background color */}
-      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <span className="section-label text-electric-400 justify-start">
-            <Rocket size={12} /> Services
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
-            Technology services <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">for every stage</span>
-          </h1>
-          <p className="text-white/55 text-lg max-w-xl leading-relaxed">
-            From product development to automated testing, our end-to-end services help you build, ship, and scale with confidence.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-custom text-brand-900 dark:text-white pt-24 pb-32" ref={containerRef}>
+      {/* Background Ambience */}
+      <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+      <div className="fixed top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-accent-blue/10 blur-[120px] pointer-events-none" />
 
-      {/* SDLC Banner */}
-      <section className="bg-gray-50 py-10 border-b border-gray-200 overflow-x-auto reveal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 min-w-max mx-auto justify-center flex-wrap">
-            {sdlcStages.map((stage, i) => (
-              <div key={stage} className="flex items-center gap-2">
-                <span className="bg-white border border-gray-200 text-gray-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm whitespace-nowrap">
-                  {stage}
-                </span>
-                {i < sdlcStages.length - 1 && (
-                  <ArrowRight size={14} className="text-gray-300 shrink-0" />
-                )}
-              </div>
-            ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-24"
+        >
+          <div className="inline-flex items-center gap-2 bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
+            <Sparkles size={16} className="text-accent-blue" />
+            <span className="text-brand-600 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Our Capabilities</span>
           </div>
-        </div>
-      </section>
+          
+          <h1 className="text-5xl md:text-6xl font-bold font-display leading-tight mb-6">
+            Engineering excellence <br />
+            <span className="gradient-text-custom">delivered.</span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-brand-600 dark:text-darkbrand-600 leading-relaxed">
+            From strategic ideation to flawless execution, we provide the technical firepower required to scale your vision. No compromises.
+          </p>
+        </motion.div>
 
-      {/* Service Sections */}
-      <div className="bg-white">
-        {services.map((svc, idx) => (
-          <section
-            key={svc.id}
-            id={svc.id}
-            className={`py-20 lg:py-28 ${idx % 2 === 1 ? 'bg-gray-50' : 'bg-white'}`}
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className={`grid lg:grid-cols-2 gap-16 items-start ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                <div className={`reveal ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className={`w-14 h-14 bg-gradient-to-br ${svc.color} rounded-2xl flex items-center justify-center text-white shadow-lg mb-6`}>
-                    {svc.icon}
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {SERVICES.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="group relative"
+            >
+              {/* Glass Card */}
+              <div className="relative h-full bg-white dark:bg-darkbrand-100 shadow-sm backdrop-blur-xl border border-brand-200 dark:border-darkbrand-200 rounded-3xl p-8 overflow-hidden transition-all duration-500 hover:border-brand-200 dark:border-darkbrand-200 hover:shadow-2xl hover:bg-white dark:bg-darkbrand-100 shadow-sm">
+                
+                {/* Glow Effect on Hover */}
+                <div className={`absolute -right-20 -top-20 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${service.bg}`} />
+                
+                <div className="relative z-10">
+                  <div className={`w-16 h-16 rounded-2xl bg-white dark:bg-darkbrand-100 shadow-sm flex items-center justify-center mb-8 border border-brand-200 dark:border-darkbrand-200 shadow-inner`}>
+                    {service.icon}
                   </div>
-                  <span className={`section-label ${svc.accent}`}>
-                    {svc.label}
-                  </span>
-                  <h2 className="section-title mb-5">{svc.headline}</h2>
-                  <p className="text-gray-500 leading-relaxed mb-8">{svc.body}</p>
-
-                  {svc.bullets && (
-                    <ul className="space-y-3">
-                      {svc.bullets.map((b) => (
-                        <li key={b} className="flex items-start gap-3 text-gray-600">
-                          <CheckCircle2 size={16} className={`${svc.accent} shrink-0 mt-0.5`} />
-                          <span className="text-sm">{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {svc.frameworks && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {automationFrameworks.map((fw) => (
-                        <div key={fw.label} className="flex items-center gap-2.5 bg-electric-50 text-electric-800 text-sm px-3 py-2.5 rounded-2xl border border-electric-100">
-                          <span className="text-electric-500">{fw.icon}</span>
-                          {fw.label}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  
+                  <h4 className="text-sm font-mono text-accent-blue mb-2 uppercase tracking-wider">{service.subtitle}</h4>
+                  <h3 className="text-2xl font-bold mb-4 font-display">{service.title}</h3>
+                  <p className="text-brand-600 dark:text-darkbrand-600 leading-relaxed mb-8">
+                    {service.description}
+                  </p>
+                  
+                  <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-900 dark:text-white group-hover:text-accent-blue transition-colors">
+                    Discuss your project <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
+              </div>
+            </motion.div>
+          ))}
 
-                {/* Visual side */}
-                <div className={`reveal ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  {svc.steps ? (
-                    <div className="space-y-3">
-                      {svc.steps.map((step, i) => (
-                        <div
-                          key={step.name}
-                          className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-electric-200 hover:shadow-sm transition-all duration-200 group"
-                        >
-                          <div className="w-7 h-7 bg-electric-500/10 rounded-lg flex items-center justify-center shrink-0 font-mono text-electric-500 text-xs font-bold group-hover:bg-electric-500 group-hover:text-white transition-all">
-                            {String(i + 1).padStart(2, '0')}
-                          </div>
-                          <div>
-                            <div className="font-semibold text-navy-900 text-sm mb-0.5">{step.name}</div>
-                            <div className="text-gray-500 text-sm leading-relaxed">{step.desc}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className={`${svc.bg} rounded-3xl p-8 lg:p-10 flex flex-col gap-4`}>
-                      <div className="font-display font-bold text-navy-900 text-2xl mb-2">{svc.label}</div>
-                      <div className="w-12 h-1 bg-gradient-to-r from-electric-600 to-electric-300 rounded-full mb-4" />
-                      <p className="text-gray-600 leading-relaxed text-sm">{svc.body}</p>
-                      <Link to="/contact" className="mt-4 btn-primary self-start text-sm">
-                        Get a Quote <ArrowRight size={14} />
-                      </Link>
-                    </div>
-                  )}
-                </div>
+          {/* CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="group relative md:col-span-2 lg:col-span-1"
+          >
+            <div className="h-full bg-gradient-to-br from-electric-600 to-blue-800 rounded-3xl p-8 overflow-hidden relative flex flex-col justify-center items-center text-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+              <div className="relative z-10">
+                <h3 className="text-3xl font-bold mb-4 font-display text-brand-900 dark:text-white">Don't see what you need?</h3>
+                <p className="text-brand-600 dark:text-darkbrand-600 mb-8">
+                  We specialize in custom solutions. Let's talk about your unique technical challenges.
+                </p>
+                <Link to="/contact" className="btn-primary bg-white dark:bg-darkbrand-100 text-brand-900 dark:text-white hover:bg-white dark:bg-darkbrand-100 border-none shadow-xl">
+                  Contact Us
+                </Link>
               </div>
             </div>
-          </section>
-        ))}
-      </div>
-
-      {/* CTA */}
-      <section className="bg-navy-900 py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
-          <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-4">
-            Not sure which service fits?
-          </h2>
-          <p className="text-white/55 mb-8 leading-relaxed">
-            Book a free consultation and we'll map your needs to the right solution.
-          </p>
-          <Link to="/contact" className="btn-primary text-base py-3.5 px-8 inline-flex">
-            Book a Free Consultation <ArrowRight size={18} />
-          </Link>
+          </motion.div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

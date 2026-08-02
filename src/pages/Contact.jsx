@@ -1,249 +1,105 @@
-import { useState } from 'react';
-import {
-  Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle,
-  MessageSquare, ArrowRight, Loader2
-} from 'lucide-react';
-import { useScrollRevealAll } from '../hooks/useScrollReveal';
-
-const contactInfo = [
-  {
-    icon: <Phone size={20} />,
-    label: 'Phone',
-    value: '+91 80 4090 6245',
-    href: 'tel:+918040906245',
-    sub: 'Mon–Fri, 9am–6pm IST',
-  },
-  {
-    icon: <Mail size={20} />,
-    label: 'Email',
-    value: 'info@serveaseinnovation.com',
-    href: 'mailto:info@serveaseinnovation.com',
-    sub: 'We respond within 24 hours',
-  },
-  {
-    icon: <MapPin size={20} />,
-    label: 'Office',
-    value: 'Bangalore, India',
-    sub: 'Available for in-person meetings',
-  },
-];
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, MessageSquare, MapPin, Send, Zap } from 'lucide-react';
 
 export default function Contact() {
-  useScrollRevealAll();
+  const [focusedField, setFocusedField] = useState(null);
 
-  const [form, setForm] = useState({ name: '', email: '', message: '', subscribe: false });
-  const [status, setStatus] = useState('idle'); // idle | loading | success | error
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) return;
-
-    setStatus('loading');
-    // Simulate form submission
-    await new Promise((res) => setTimeout(res, 1200));
-    setStatus('success');
-    setForm({ name: '', email: '', message: '', subscribe: false });
-  };
+  const inputClasses = (name) => `
+    w-full bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-xl px-4 py-4 text-brand-900 dark:text-white placeholder-white/30
+    transition-all duration-300 outline-none
+    ${focusedField === name ? 'bg-white dark:bg-darkbrand-100 shadow-sm border-electric-500 shadow-sm' : 'hover:border-brand-200 dark:border-darkbrand-200'}
+  `;
 
   return (
-    <div className="min-h-screen">
-      {/* Hero - Updated background color */}
-      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <span className="section-label text-electric-400">
-            <MessageSquare size={12} /> Contact Us
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
-            Let's start a{' '}
-            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
-              conversation
-            </span>
-          </h1>
-          <p className="text-white/55 text-lg max-w-xl leading-relaxed">
-            We know that every client has unique needs. Send us a message and we'll get back to you soon — or call us directly for a live demo.
-          </p>
+    <div className="min-h-screen bg-custom text-brand-900 dark:text-white overflow-hidden pb-32">
+      <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+      <div className="fixed top-1/4 right-0 w-96 h-96 bg-accent-blue/10 blur-[120px] pointer-events-none" />
+      <div className="fixed bottom-0 left-1/4 w-96 h-96 bg-purple-50 blur-[120px] pointer-events-none" />
+
+      <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <div className="inline-flex items-center gap-2 bg-accent-blue/10 border border-electric-500/20 text-accent-blue rounded-full px-4 py-2 mb-6">
+              <Zap size={16} />
+              <span className="text-sm font-semibold uppercase tracking-wider">Contact Us</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">
+              Let's build something <br/>
+              <span className="gradient-text-custom">extraordinary.</span>
+            </h1>
+            <p className="text-xl text-brand-600 dark:text-darkbrand-600 max-w-2xl mx-auto">
+              Whether you have a fully fleshed-out RFP or just a napkin sketch, we're ready to engineer it.
+            </p>
+          </motion.div>
         </div>
-      </section>
 
-      {/* Content */}
-      <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact info */}
-            <div className="lg:col-span-1 space-y-6 reveal">
-              <div>
-                <h2 className="text-2xl font-display font-bold text-navy-900 mb-2">Get in touch</h2>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Questions, project ideas, or just want to say hello — we're always available to chat.
-                </p>
-              </div>
-
-              {contactInfo.map(({ icon, label, value, href, sub }) => (
-                <div key={label} className="flex gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-electric-200 hover:shadow-sm transition-all duration-200">
-                  <div className="w-10 h-10 bg-electric-500/10 rounded-2xl flex items-center justify-center text-electric-500 shrink-0">
-                    {icon}
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{label}</div>
-                    {href ? (
-                      <a href={href} className="font-medium text-navy-900 hover:text-electric-500 transition-colors text-sm">
-                        {value}
-                      </a>
-                    ) : (
-                      <div className="font-medium text-navy-900 text-sm">{value}</div>
-                    )}
-                    <div className="text-gray-400 text-xs mt-0.5">{sub}</div>
-                  </div>
+        <div className="grid lg:grid-cols-5 gap-12 items-start">
+          
+          {/* Contact Info */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-2 space-y-6"
+          >
+            {[
+              { icon: <MessageSquare />, title: 'Chat to sales', desc: 'Speak to our friendly team.', info: 'sales@serveaseinnovation.com' },
+              { icon: <Mail />, title: 'Support', desc: 'We are here to help.', info: 'support@serveaseinnovation.com' },
+              { icon: <MapPin />, title: 'Visit us', desc: 'HQ in Bangalore, with presence in Dubai.', info: '123 Tech Park, Bangalore, India' }
+            ].map((item, i) => (
+              <div key={i} className="bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-6 flex gap-4 hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors">
+                <div className="w-12 h-12 bg-accent-blue/10 rounded-xl flex items-center justify-center text-accent-blue shrink-0">
+                  {item.icon}
                 </div>
-              ))}
-
-              <div className="bg-navy-900 rounded-2xl p-5">
-                <p className="text-white/80 text-sm font-medium mb-1">Call for a live demo</p>
-                <a
-                  href="tel:+918040906245"
-                  className="text-electric-400 font-semibold text-lg hover:text-electric-300 transition-colors"
-                >
-                  +91 80 4090 6245
-                </a>
+                <div>
+                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                  <p className="text-brand-600 dark:text-darkbrand-600 text-sm mb-2">{item.desc}</p>
+                  <a href="#" className="text-accent-blue font-medium text-sm hover:underline">{item.info}</a>
+                </div>
               </div>
-            </div>
+            ))}
+          </motion.div>
 
-            {/* Contact form */}
-            <div className="lg:col-span-2 reveal">
-              <div className="card p-8 lg:p-10">
-                {status === 'success' ? (
-                  <div className="flex flex-col items-center justify-center py-16 text-center">
-                    <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4">
-                      <CheckCircle2 size={32} className="text-emerald-500" />
-                    </div>
-                    <h3 className="font-display font-bold text-xl text-navy-900 mb-2">Message sent!</h3>
-                    <p className="text-gray-500 mb-6">
-                      Thanks for reaching out. We'll get back to you within 24 hours.
-                    </p>
-                    <button
-                      onClick={() => setStatus('idle')}
-                      className="btn-outline text-sm"
-                    >
-                      Send another message
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl font-display font-bold text-navy-900 mb-1">Send us a message</h2>
-                      <p className="text-gray-500 text-sm">We'll respond within one business day.</p>
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Name <span className="text-red-400">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          placeholder="Your full name"
-                          required
-                          className="input-field"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Email <span className="text-red-400">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder="you@company.com"
-                          required
-                          className="input-field"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Message <span className="text-red-400">*</span>
-                      </label>
-                      <textarea
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your project, what services you're interested in, or any questions you have..."
-                        required
-                        rows={5}
-                        className="input-field resize-none"
-                      />
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <input
-                        type="checkbox"
-                        id="subscribe"
-                        name="subscribe"
-                        checked={form.subscribe}
-                        onChange={handleChange}
-                        className="mt-1 w-4 h-4 accent-electric-500"
-                      />
-                      <label htmlFor="subscribe" className="text-sm text-gray-500 cursor-pointer">
-                        Sign me up for updates, promotions, and news from ServEase Innovation.
-                      </label>
-                    </div>
-
-                    {status === 'error' && (
-                      <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
-                        <AlertCircle size={15} />
-                        Something went wrong. Please try again or email us directly.
-                      </div>
-                    )}
-
-                    <button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      className="btn-primary w-full justify-center"
-                    >
-                      {status === 'loading' ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          Sending…
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <Send size={16} />
-                        </>
-                      )}
-                    </button>
-
-                    <p className="text-xs text-gray-400 text-center">
-                      This site is protected by reCAPTCHA and the Google{' '}
-                      <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-gray-600">
-                        Privacy Policy
-                      </a>{' '}
-                      and{' '}
-                      <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-gray-600">
-                        Terms of Service
-                      </a>{' '}
-                      apply.
-                    </p>
-                  </form>
-                )}
+          {/* Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-3 bg-white dark:bg-darkbrand-100 shadow-sm backdrop-blur-xl border border-brand-200 dark:border-darkbrand-200 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent-blue/10 blur-[80px] pointer-events-none" />
+            
+            <form className="relative z-10 space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">First Name</label>
+                  <input type="text" placeholder="John" className={inputClasses('fname')} onFocus={() => setFocusedField('fname')} onBlur={() => setFocusedField(null)} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">Last Name</label>
+                  <input type="text" placeholder="Doe" className={inputClasses('lname')} onFocus={() => setFocusedField('lname')} onBlur={() => setFocusedField(null)} />
+                </div>
               </div>
-            </div>
-          </div>
+
+              <div>
+                <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">Email Address</label>
+                <input type="email" placeholder="john@company.com" className={inputClasses('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">How can we help?</label>
+                <textarea rows="4" placeholder="Tell us a little about your project..." className={inputClasses('message')} onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)} />
+              </div>
+
+              <button className="w-full btn-primary justify-center py-4 text-lg">
+                Send Message <Send size={20} className="ml-2" />
+              </button>
+            </form>
+          </motion.div>
+
         </div>
-      </section>
+      </div>
     </div>
   );
 }

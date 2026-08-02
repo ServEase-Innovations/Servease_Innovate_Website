@@ -1,283 +1,103 @@
-import { useState } from 'react';
-import {
-  Briefcase, MapPin, Mail, ChevronDown,
-  CheckCircle2, Star, Users2, Zap, Clock
-} from 'lucide-react';
-import { useScrollRevealAll } from '../hooks/useScrollReveal';
-import SplitText from '../components/SplitText';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Rocket, Coffee, Laptop, Heart, ChevronRight, Briefcase } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const responsibilities = [
-  'Develop and execute marketing strategies aligned with overall business objectives.',
-  'Lead and manage marketing campaigns from concept to execution and analysis.',
-  'Collaborate with cross-functional teams to ensure brand consistency.',
-  'Analyse market trends and customer insights to identify growth opportunities.',
-  'Manage social media platforms, enhancing engagement and increasing brand awareness.',
-  'Track performance of all marketing campaigns and assess ROI and KPIs.',
-  'Prepare and manage the marketing budget.',
-  'Organize and attend promotional events and conferences.',
+const BENEFITS = [
+  { icon: <Laptop />, title: 'Remote-First', desc: 'Work from anywhere. We value output, not office hours.' },
+  { icon: <Heart />, title: 'Health & Wellness', desc: 'Comprehensive coverage for you and your dependents.' },
+  { icon: <Rocket />, title: 'Growth Budget', desc: 'Annual stipend for courses, conferences, and books.' },
+  { icon: <Coffee />, title: 'Unlimited PTO', desc: 'Take the time you need to recharge and stay sharp.' }
 ];
 
-const requirements = [
-  "Bachelor's degree in Marketing, Business Administration or relevant field.",
-  'Proven track record in developing effective marketing strategies and campaigns.',
-  'Strong analytical skills to forecast and identify trends and challenges.',
-  'Excellent communication and interpersonal skills.',
-  'Familiarity with CRM software and digital marketing tools and techniques.',
-  'Ability to lead and inspire a team.',
-];
-
-const perks = [
-  { icon: <Zap size={18} />, label: 'Innovation-led culture' },
-  { icon: <Users2 size={18} />, label: 'Collaborative team' },
-  { icon: <Star size={18} />, label: 'Growth opportunities' },
-  { icon: <Clock size={18} />, label: 'Flexible work environment' },
-];
-
-function JobCard({ job }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className="card reveal overflow-hidden">
-      <div className="p-6 lg:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-5">
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="bg-electric-500/10 text-electric-600 text-xs font-semibold px-3 py-1 rounded-full border border-electric-200">
-                {job.type}
-              </span>
-              <span className="bg-amber-50 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full border border-amber-200">
-                {job.category}
-              </span>
-            </div>
-            <h3 className="font-display font-bold text-navy-900 text-xl mb-1">{job.title}</h3>
-            <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-              <span className="flex items-center gap-1.5">
-                <MapPin size={13} className="text-electric-500" />
-                {job.location}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Briefcase size={13} className="text-electric-500" />
-                {job.dept}
-              </span>
-            </div>
-          </div>
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-2 text-sm font-medium text-electric-500 hover:text-electric-400 transition-colors shrink-0"
-          >
-            {expanded ? 'Show Less' : 'Show More'}
-            <ChevronDown
-              size={16}
-              className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
-            />
-          </button>
-        </div>
-
-        <p className="text-gray-500 text-sm leading-relaxed">{job.summary}</p>
-      </div>
-
-      {expanded && (
-        <div className="border-t border-gray-100 p-6 lg:p-8 bg-gray-50/50">
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div>
-              <h4 className="font-semibold text-navy-900 mb-4 flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-electric-500" />
-                Responsibilities
-              </h4>
-              <ul className="space-y-3">
-                {responsibilities.map((r, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 bg-electric-500 rounded-full shrink-0 mt-1.5" />
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-navy-900 mb-4 flex items-center gap-2">
-                <Star size={16} className="text-amber-500" />
-                Requirements
-              </h4>
-              <ul className="space-y-3">
-                {requirements.map((r, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full shrink-0 mt-1.5" />
-                    {r}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8 bg-electric-50 border border-electric-200 rounded-2xl p-5">
-                <p className="text-electric-800 text-sm font-medium mb-3">Ready to apply?</p>
-                <p className="text-electric-700/70 text-sm mb-4">
-                  Share your resume. Shortlisted candidates will be contacted by our HR team.
-                </p>
-                <a
-                  href="mailto:hr@serveaseinnovation.com"
-                  className="inline-flex items-center gap-2 bg-electric-500 text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-electric-400 transition-colors"
-                >
-                  <Mail size={14} />
-                  hr@serveaseinnovation.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-const jobs = [
-  {
-    title: 'Digital Marketing Manager',
-    type: 'Full-Time',
-    category: 'Non-Tech',
-    dept: 'Marketing',
-    location: 'Bangalore, India & Dubai, UAE',
-    summary:
-      "We're looking for a flexible and versatile marketer who will set up the marketing strategies for our product ServEaso — a location-based home care service in India and Dubai. If you live and breathe marketing, we need to talk.",
-  },
+const ROLES = [
+  { title: 'Senior Full Stack Engineer', type: 'Remote', dept: 'Engineering' },
+  { title: 'Product Designer (UI/UX)', type: 'Remote', dept: 'Design' },
+  { title: 'QA Automation Engineer', type: 'Hybrid', dept: 'Quality' }
 ];
 
 export default function Careers() {
-  useScrollRevealAll();
-
   return (
-    <div className="min-h-screen">
-      {/* Hero — #082f49 seamless with home */}
-      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
-        {/* Subtle grid */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
-        {/* Glow accent */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-custom text-brand-900 dark:text-white overflow-hidden pb-32">
+      <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <span className="section-label text-electric-400">
-            <Briefcase size={12} /> Careers
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
-            We are{' '}
-            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
-              hiring
-            </span>
+      {/* Hero */}
+      <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-2 bg-accent-orange/10 border border-accent-orange/20 text-accent-orange rounded-full px-4 py-2 mb-6">
+            <Briefcase size={16} />
+            <span className="text-sm font-semibold uppercase tracking-wider">We are hiring</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">
+            Build the future <br/>
+            <span className="gradient-text-custom">with us.</span>
           </h1>
-          <p className="text-white/55 text-lg max-w-xl leading-relaxed">
-            Join a team of forward-thinkers building technology that makes a real difference — in homes, businesses, and communities.
+          <p className="text-xl text-brand-600 dark:text-darkbrand-600 mb-8 max-w-2xl mx-auto">
+            Join a collective of passionate builders. We're tackling hard problems and shipping products that matter.
           </p>
-        </div>
-      </section>
-
-      {/* Seamless wave from hero into white */}
-      <div style={{ backgroundColor: '#082f49', lineHeight: 0, display: 'block' }}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 36" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
-          <path d="M0,36 L0,18 C360,36 720,0 1080,18 C1260,27 1380,22 1440,18 L1440,36 Z" fill="#ffffff" />
-        </svg>
+        </motion.div>
       </div>
 
-      {/* Perks */}
-      <section className="bg-white py-14 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {perks.map(({ icon, label }) => (
-              <div key={label} className="flex items-center gap-3 text-gray-600 reveal">
-                <div className="w-9 h-9 bg-electric-50 border border-electric-100 rounded-2xl flex items-center justify-center text-electric-500 shrink-0">
-                  {icon}
-                </div>
-                <span className="text-sm font-medium">{label}</span>
+      {/* Benefits Grid */}
+      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {BENEFITS.map((benefit, i) => (
+            <motion.div 
+              key={benefit.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-6 backdrop-blur-md"
+            >
+              <div className="w-12 h-12 bg-accent-blue/10 rounded-xl flex items-center justify-center text-accent-blue mb-4">
+                {benefit.icon}
               </div>
-            ))}
-          </div>
+              <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
+              <p className="text-brand-600 dark:text-darkbrand-600 text-sm leading-relaxed">{benefit.desc}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
 
       {/* Open Roles */}
-      <section className="bg-gray-50 py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <span className="section-label">
-              <Briefcase size={12} /> Open Positions
-            </span>
-            <SplitText
-              text="Find your next opportunity"
-              tag="h2"
-              className="section-title mb-4"
-              delay={40}
-              duration={0.7}
-              ease="power3.out"
-              splitType="words"
-              from={{ opacity: 0, y: 36 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-60px"
-              textAlign="left"
-            />
-            <SplitText
-              text="We're a growing team with ambitions to transform everyday lives. Here's where you fit in."
-              tag="p"
-              className="text-gray-500"
-              delay={18}
-              duration={0.6}
-              ease="power3.out"
-              splitType="words"
-              from={{ opacity: 0, y: 20 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-40px"
-              textAlign="left"
-            />
-          </div>
-
-          <div className="space-y-6">
-            {jobs.map((job) => (
-              <JobCard key={job.title} job={job} />
-            ))}
-          </div>
-
-          {/* General application */}
-          <div className="mt-10 bg-gradient-to-br from-navy-900 to-navy-800 rounded-2xl p-6 lg:p-8 relative overflow-hidden reveal">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-electric-500/10 rounded-full blur-2xl" />
-            <div className="relative">
-              <SplitText
-                text="Don't see a role that fits?"
-                tag="h3"
-                className="font-display font-semibold text-white text-lg mb-2"
-                delay={35}
-                duration={0.6}
-                ease="power3.out"
-                splitType="words"
-                from={{ opacity: 0, y: 24 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-40px"
-                textAlign="left"
-              />
-              <SplitText
-                text="We're always looking for talented people. Send us your resume and tell us where you'd add value."
-                tag="p"
-                className="text-white/55 text-sm mb-5 max-w-md"
-                delay={14}
-                duration={0.55}
-                ease="power3.out"
-                splitType="words"
-                from={{ opacity: 0, y: 18 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-40px"
-                textAlign="left"
-              />
-              <a
-                href="mailto:hr@serveaseinnovation.com"
-                className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-electric-300 transition-colors"
-              >
-                <Mail size={14} />
-                Send Open Application
-              </a>
-            </div>
-          </div>
+      <div className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-16">
+        <h2 className="text-3xl font-display font-bold mb-8">Open Positions</h2>
+        
+        <div className="space-y-4">
+          {ROLES.map((role, i) => (
+            <motion.div 
+              key={role.title}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors cursor-pointer"
+            >
+              <div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-accent-blue transition-colors">{role.title}</h3>
+                <div className="flex gap-3 text-sm text-brand-600 dark:text-darkbrand-600">
+                  <span className="bg-white dark:bg-darkbrand-100 shadow-sm px-2 py-1 rounded">{role.dept}</span>
+                  <span className="bg-white dark:bg-darkbrand-100 shadow-sm px-2 py-1 rounded">{role.type}</span>
+                </div>
+              </div>
+              
+              <div className="mt-4 md:mt-0">
+                <Link to="/contact" className="inline-flex items-center gap-2 text-accent-blue font-semibold group-hover:gap-3 transition-all">
+                  Apply Now <ChevronRight size={16} />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+        
+        <div className="mt-12 text-center p-8 border border-dashed border-brand-200 dark:border-darkbrand-200 rounded-2xl bg-white dark:bg-darkbrand-100 shadow-sm">
+          <p className="text-brand-600 dark:text-darkbrand-600 mb-4">Don't see a role that fits?</p>
+          <Link to="/contact" className="btn-primary py-2 px-6">Send an Open Application</Link>
+        </div>
+      </div>
+
     </div>
   );
 }

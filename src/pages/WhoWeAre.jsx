@@ -1,251 +1,112 @@
-import { Link } from 'react-router-dom';
-import {
-  Zap, ArrowRight, Heart, Globe2, Users2, Lightbulb,
-  Target, Handshake, TrendingUp, BookOpen, Briefcase
-} from 'lucide-react';
-import { useScrollRevealAll } from '../hooks/useScrollReveal';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { Sparkles, Users, Code2, Globe } from 'lucide-react';
 
-const values = [
-  {
-    icon: <Lightbulb size={22} />,
-    color: 'from-electric-500 to-electric-300',
-    bg: 'bg-electric-50',
-    title: 'Innovation First',
-    desc: 'We strive to create a collaborative environment where creativity flourishes and groundbreaking solutions emerge. Every project is driven by a passion for excellence.',
-  },
-  {
-    icon: <Handshake size={22} />,
-    color: 'from-electric-600 to-electric-400',
-    bg: 'bg-electric-50',
-    title: 'Partnership Over Transaction',
-    desc: "We believe in the power of partnership. By fostering open communication and building strong relationships, every solution is tailored to meet your specific goals.",
-  },
-  {
-    icon: <Heart size={22} />,
-    color: 'from-electric-500 to-electric-300',
-    bg: 'bg-electric-50',
-    title: 'Community Impact',
-    desc: 'Through our CSR initiatives, we help lower-to-middle class citizens find employment based on their interests, supporting education, volunteering, and diversity.',
-  },
-  {
-    icon: <Globe2 size={22} />,
-    color: 'from-electric-600 to-electric-400',
-    bg: 'bg-electric-50',
-    title: 'Sustainable Future',
-    desc: 'We remain dedicated to making a positive impact — through sustainable practices, community engagement, and cutting-edge technology for a brighter, inclusive world.',
-  },
+const TEAM = [
+  { name: 'Founding Team', role: 'Leadership', experience: '30+ Years Combined' },
+  { name: 'Engineering', role: 'Development', experience: 'Full Stack & AI' },
+  { name: 'Quality Assurance', role: 'Testing', experience: '20+ Years Expertise' }
 ];
 
-const processSteps = [
-  { step: '01', title: 'Understand', desc: "We start by deeply understanding your requirements, challenges, and aspirations." },
-  { step: '02', title: 'Prototype', desc: "We build a working prototype to validate concepts before full development begins." },
-  { step: '03', title: 'Build & Test', desc: "Our engineers build with quality in mind, backed by rigorous testing at every stage." },
-  { step: '04', title: 'Deploy & Support', desc: "We deploy your solution and provide ongoing maintenance, updates, and support." },
-];
-
-const expertise = [
-  { icon: <Briefcase size={16} />, label: 'Software Development' },
-  { icon: <Globe2 size={16} />, label: 'Web Design' },
-  { icon: <TrendingUp size={16} />, label: 'Cloud Computing' },
-  { icon: <Target size={16} />, label: 'Cybersecurity' },
-  { icon: <BookOpen size={16} />, label: 'QA & Automation' },
-  { icon: <Users2 size={16} />, label: 'IT Staffing' },
+const TIMELINE = [
+  { year: '2024', title: 'ServEase Innovation is Born', desc: 'Founded with a mission to bridge the gap between complex technology and human-centric solutions.' },
+  { year: 'Today', title: 'Global Impact', desc: 'Delivering robust software and scaling the ServEaso flagship product across multiple regions.' },
+  { year: 'Future', title: 'Relentless Innovation', desc: 'Expanding our AI & Automation offerings to revolutionize how businesses operate.' }
 ];
 
 export default function WhoWeAre() {
-  useScrollRevealAll();
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: timelineRef, offset: ["start center", "end center"] });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <div className="min-h-screen">
-      {/* Hero - Updated background color */}
-      <section className="pt-32 pb-20 relative overflow-hidden" style={{ backgroundColor: '#082f49' }}>
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-        <div className="absolute top-0 left-0 w-96 h-96 bg-electric-500/10 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <span className="section-label text-electric-400">
-            <Users2 size={12} /> Who We Are
-          </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight max-w-2xl">
-            We innovate for{' '}
-            <span className="bg-gradient-to-r from-electric-300 to-electric-100 bg-clip-text text-transparent">
-              better lives
-            </span>
+    <div className="min-h-screen bg-custom text-brand-900 dark:text-white overflow-hidden pb-32">
+      <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+
+      {/* Hero Section */}
+      <div className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <div className="inline-flex items-center gap-2 bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-full px-4 py-2 mb-6">
+            <Users size={16} className="text-accent-blue" />
+            <span className="text-brand-600 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Who We Are</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold font-display leading-tight mb-8">
+            Technology that <br/>
+            <span className="gradient-text-custom">serves people.</span>
           </h1>
-          <p className="text-white/55 text-lg max-w-xl leading-relaxed">
-            Founded in 2024, ServEase Innovation & Technology is built on the belief that technology should serve people — and make their lives meaningfully better.
+          
+          <p className="text-xl text-brand-600 dark:text-darkbrand-600 max-w-2xl mx-auto leading-relaxed">
+            We are a collective of veteran engineers, designers, and strategists. We believe in building software that doesn't just function—it empowers.
           </p>
-        </div>
-      </section>
+        </motion.div>
+      </div>
 
-      {/* Mission & Vision */}
-      <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 mb-20">
-            <div className="reveal bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-8 lg:p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-electric-500/10 rounded-full blur-2xl" />
-              <div className="relative">
-                <div className="w-12 h-12 bg-electric-500/20 rounded-2xl flex items-center justify-center text-electric-400 mb-5">
-                  <Target size={22} />
+      {/* Timeline Section */}
+      <div className="relative px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-20" ref={timelineRef}>
+        <div className="absolute left-[24px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white dark:bg-darkbrand-100 shadow-sm" />
+        <motion.div 
+          className="absolute left-[24px] md:left-1/2 top-0 bottom-0 w-[2px] bg-electric-500 origin-top" 
+          style={{ scaleY }} 
+        />
+
+        {TIMELINE.map((item, index) => {
+          const isEven = index % 2 === 0;
+          return (
+            <motion.div 
+              key={item.year}
+              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className={`relative flex items-center justify-between mb-24 md:mb-32 ${isEven ? 'md:flex-row-reverse' : ''}`}
+            >
+              {/* Center Node */}
+              <div className="absolute left-[16px] md:left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-electric-500 border-4 border-navy-900 shadow-md z-10" />
+              
+              <div className="hidden md:block w-[45%]" />
+              
+              <div className="w-full md:w-[45%] pl-14 md:pl-0">
+                <div className="bg-white dark:bg-darkbrand-100 shadow-sm backdrop-blur-md border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-8 hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors">
+                  <span className="text-accent-blue font-mono font-bold mb-2 block">{item.year}</span>
+                  <h3 className="text-2xl font-bold mb-3 font-display">{item.title}</h3>
+                  <p className="text-brand-600 dark:text-darkbrand-600 leading-relaxed">{item.desc}</p>
                 </div>
-                <h2 className="text-2xl font-display font-bold text-white mb-4">Our Mission</h2>
-                <p className="text-white/60 leading-relaxed">
-                  To help businesses grow by providing innovative IT solutions. We strive to deliver the highest quality products and services that exceed our clients' expectations — while making a positive impact on the communities we serve.
-                </p>
               </div>
-            </div>
+            </motion.div>
+          );
+        })}
+      </div>
 
-            <div className="reveal bg-gradient-to-br from-electric-500/8 to-electric-300/10 rounded-3xl p-8 lg:p-10 border border-electric-100">
-              <div className="w-12 h-12 bg-electric-500/15 rounded-2xl flex items-center justify-center text-electric-500 mb-5">
-                <Globe2 size={22} />
-              </div>
-              <h2 className="text-2xl font-display font-bold text-navy-900 mb-4">Our Vision</h2>
-              <p className="text-gray-600 leading-relaxed">
-                Building inclusive communities through technology. Our company prioritizes Corporate Social Responsibility by developing solutions that enable lower-to-middle class citizens to find meaningful work, supporting education, promoting diversity, and adopting ethical business practices.
-              </p>
-            </div>
-          </div>
-
-          {/* About content */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="reveal">
-              <span className="section-label">
-                <Zap size={12} className="fill-electric-500" /> Our Story
-              </span>
-              <h2 className="section-title mb-6">
-                Ideas. Innovation.{' '}
-                <span className="gradient-text">Implementation.</span>
-              </h2>
-              <p className="text-gray-500 leading-relaxed mb-5">
-                ServEase Innovation & Technology creates a future where creativity knows no bounds. Our collaborative environment nurtures your vision, providing the tools and support necessary to bring groundbreaking concepts to life.
-              </p>
-              <p className="text-gray-500 leading-relaxed mb-5">
-                Together, we can transform industries, improve lives, and make a lasting impact — whether you're an entrepreneur with a bold startup or an established business looking to stay ahead of the curve.
-              </p>
-              <p className="text-gray-500 leading-relaxed">
-                Ideas, innovation, and implementation are more than just new technological inventions. We drive innovation focused on people, innovators, and business.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 reveal">
-              <div className="col-span-2 bg-navy-900 rounded-2xl p-6">
-                <p className="text-white/80 text-sm leading-relaxed italic">
-                  "Join our community of forward-thinkers and change-makers. Let's push the boundaries of what's possible and build a better tomorrow, today."
-                </p>
-              </div>
-              {[
-                { label: 'Founded', value: '2024' },
-                { label: 'Team', value: '20+' },
-                { label: 'Experience', value: '30+ yrs' },
-                { label: 'Locations', value: '2 Cities' },
-              ].map(({ label, value }) => (
-                <div key={label} className="bg-gray-50 rounded-xl p-5 border border-gray-100">
-                  <div className="font-display font-bold text-2xl text-navy-900 mb-1">{value}</div>
-                  <div className="text-gray-500 text-sm">{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Core Teams */}
+      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold font-display mb-4">Our Backbone</h2>
+          <p className="text-brand-600 dark:text-darkbrand-600 max-w-xl mx-auto">The expertise driving our success and yours.</p>
         </div>
-      </section>
 
-      {/* Core Values */}
-      <section className="bg-gray-50 py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 reveal">
-            <span className="section-label justify-center">
-              <Heart size={12} /> Core Values
-            </span>
-            <h2 className="section-title mb-4">
-              What drives <span className="gradient-text">everything we do</span>
-            </h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map(({ icon, color, bg, title, desc }, i) => (
-              <div
-                key={title}
-                className="card p-6 reveal"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <div className={`w-12 h-12 bg-gradient-to-br ${color} rounded-2xl flex items-center justify-center text-white mb-4 shadow-md`}>
-                  {icon}
-                </div>
-                <h3 className="font-display font-semibold text-navy-900 mb-2">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+        <div className="grid md:grid-cols-3 gap-6">
+          {TEAM.map((member, i) => (
+            <motion.div 
+              key={member.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-gradient-to-b from-white to-gray-50 backdrop-blur-xl border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-8 text-center group"
+            >
+              <div className="w-16 h-16 mx-auto bg-accent-blue/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Globe size={24} className="text-accent-blue" />
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-bold mb-2">{member.name}</h3>
+              <p className="text-accent-blue font-medium mb-1">{member.role}</p>
+              <p className="text-sm text-brand-600 dark:text-darkbrand-600">{member.experience}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Our Process */}
-      <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 reveal">
-            <span className="section-label justify-center">
-              <Target size={12} /> Our Process
-            </span>
-            <h2 className="section-title mb-4">
-              How we <span className="gradient-text">deliver results</span>
-            </h2>
-            <p className="section-subtitle mx-auto text-center text-gray-500">
-              A streamlined, collaborative process to deliver customized IT solutions.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map(({ step, title, desc }, i) => (
-              <div key={step} className="relative reveal" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="card p-6 h-full">
-                  <div className="font-mono text-4xl font-bold text-electric-500/20 mb-3">{step}</div>
-                  <h3 className="font-display font-semibold text-navy-900 mb-2">{title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-                </div>
-                {i < processSteps.length - 1 && (
-                  <ArrowRight
-                    size={16}
-                    className="hidden lg:block absolute top-1/2 -right-3 text-electric-300 z-10 -translate-y-1/2"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Expertise */}
-      <section className="bg-navy-900 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="reveal">
-              <span className="section-label text-electric-400">
-                <Briefcase size={12} /> Our Expertise
-              </span>
-              <h2 className="text-3xl lg:text-4xl font-display font-bold text-white mb-4">
-                Skilled across the full technology stack
-              </h2>
-              <p className="text-white/55 leading-relaxed mb-8">
-                Our team comprises highly skilled professionals with expertise in diverse areas of IT. We stay current with the latest trends and technologies to deliver the best solutions.
-              </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-navy-900 font-semibold px-6 py-3 rounded-full hover:bg-electric-300 transition-colors">
-                Work With Us <ArrowRight size={16} />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 reveal">
-              {expertise.map(({ icon, label }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-3 bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-white/70 hover:text-white hover:bg-white/15 transition-all duration-200"
-                >
-                  <span className="text-electric-400">{icon}</span>
-                  <span className="text-sm font-medium">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
