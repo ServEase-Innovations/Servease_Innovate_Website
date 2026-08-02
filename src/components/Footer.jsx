@@ -3,20 +3,20 @@ import { Zap, Mail, Phone, MapPin } from 'lucide-react';
 
 const footerLinks = {
   Company: [
-    { to: '/who-we-are', label: 'Who We Are' },
-    { to: '/careers', label: 'Careers' },
-    { to: '/contact', label: 'Contact Us' },
+    { to: '#who-we-are', label: 'Who We Are' },
+    { to: '#careers', label: 'Careers' },
+    { to: '#contact', label: 'Contact Us' },
   ],
   Services: [
-    { to: '/services', label: 'Product Development' },
-    { to: '/services', label: 'IT Staffing' },
-    { to: '/services', label: 'QA & Testing' },
-    { to: '/services', label: 'Web Design' },
-    { to: '/services', label: 'Automation' },
+    { to: '#services', label: 'Product Development' },
+    { to: '#services', label: 'IT Staffing' },
+    { to: '#services', label: 'QA & Testing' },
+    { to: '#services', label: 'Web Design' },
+    { to: '#services', label: 'Automation' },
   ],
   Product: [
-    { to: '/product', label: 'ServEaso' },
-    { to: '/product', label: 'Mandi System' },
+    { to: '#product', label: 'ServEaso' },
+    { to: '#product', label: 'Mandi System' },
   ],
 };
 
@@ -35,12 +35,12 @@ export default function Footer() {
               Let's build something extraordinary together.
             </p>
           </div>
-          <Link
-            to="/contact"
+          <a
+            href="#contact"
             className="inline-flex items-center gap-2 bg-white dark:bg-darkbrand-100 text-brand-950 dark:text-white font-semibold px-6 py-3 rounded-full hover:bg-electric-300 hover:text-brand-950 dark:text-white transition-colors duration-200 whitespace-nowrap shrink-0"
           >
             Start a Conversation
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -50,7 +50,7 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-2 text-center sm:text-left">
-            <Link to="/" className="inline-flex items-center gap-2 mb-5">
+            <a href="#home" className="inline-flex items-center gap-2 mb-5">
               <div className="w-9 h-9 bg-gradient-to-br from-electric-600 to-electric-400 rounded-lg flex items-center justify-center shrink-0">
                 <Zap size={18} className="text-brand-950 dark:text-white fill-white" />
               </div>
@@ -62,7 +62,7 @@ export default function Footer() {
                   Innovation
                 </span>
               </div>
-            </Link>
+            </a>
 
             <p className="text-brand-900 dark:text-darkbrand-600 text-sm leading-relaxed mb-6 max-w-xs mx-auto sm:mx-0">
               Empowering your digital future. We turn ideas into scalable technology solutions for businesses of all sizes.
@@ -99,12 +99,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map(({ to, label }) => (
                   <li key={label}>
-                    <Link
-                      to={to}
+                    <a
+                      href={to}
                       className="text-brand-900 dark:text-darkbrand-600 hover:text-brand-950 dark:text-white text-sm transition-colors duration-200"
                     >
                       {label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
