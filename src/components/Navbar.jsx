@@ -92,8 +92,8 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="flex items-center gap-3 group relative z-10">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-brand-100 flex items-center justify-center shrink-0 border border-brand-200 transition-transform duration-300 group-hover:scale-105">
-                <img src={logo} alt="ServEase Innovation Logo" className="w-full h-full object-cover" />
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-transparent flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <img src={logo} alt="ServEase Innovation Logo" className="w-full h-full object-contain" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight text-brand-900">ServEase Innovation</span>
             </a>
