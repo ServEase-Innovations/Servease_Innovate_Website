@@ -31,18 +31,18 @@ export default function CookieBanner() {
           <Cookie size={18} className="text-accent-blue shrink-0 mt-0.5" />
           <div>
             <h4 className="font-semibold text-sm mb-1">This website uses cookies</h4>
-            <p className="text-brand-600 dark:text-darkbrand-600 text-xs leading-relaxed">
+            <p className="text-brand-700 dark:text-darkbrand-600 text-xs leading-relaxed">
               We use cookies to analyze traffic and optimize your experience. Your data will be aggregated with other user data.
             </p>
           </div>
-          <button onClick={decline} className="text-brand-600 dark:text-darkbrand-600 hover:text-brand-900 dark:text-white transition-colors shrink-0">
+          <button aria-label="Decline cookies" onClick={decline} className="text-brand-700 dark:text-darkbrand-600 hover:text-brand-900 dark:text-white transition-colors shrink-0">
             <X size={16} />
           </button>
         </div>
         <div className="flex gap-3">
           <button
             onClick={decline}
-            className="flex-1 px-4 py-2 text-xs font-medium text-brand-600 dark:text-darkbrand-600 border border-brand-200 dark:border-darkbrand-200 rounded-full hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors"
+            className="flex-1 px-4 py-2 text-xs font-medium text-brand-700 dark:text-darkbrand-600 border border-brand-200 dark:border-darkbrand-200 rounded-full hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors"
           >
             Decline
           </button>

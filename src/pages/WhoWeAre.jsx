@@ -28,15 +28,15 @@ export default function WhoWeAre() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <div className="inline-flex items-center gap-2 bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-full px-4 py-2 mb-6">
             <Users size={16} className="text-accent-blue" />
-            <span className="text-brand-600 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Who We Are</span>
+            <span className="text-brand-700 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Who We Are</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold font-display leading-tight mb-8">
+          <h2 className="text-5xl md:text-7xl font-bold font-display leading-tight mb-8">
             Technology that <br/>
             <span className="gradient-text-custom">serves people.</span>
-          </h1>
+          </h2>
           
-          <p className="text-xl text-brand-600 dark:text-darkbrand-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-brand-700 dark:text-darkbrand-600 max-w-2xl mx-auto leading-relaxed">
             We are a collective of veteran engineers, designers, and strategists. We believe in building software that doesn't just function—it empowers.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ export default function WhoWeAre() {
                 <div className="bg-white dark:bg-darkbrand-100 shadow-sm backdrop-blur-md border border-brand-200 dark:border-darkbrand-200 rounded-2xl p-8 hover:bg-white dark:bg-darkbrand-100 shadow-sm transition-colors">
                   <span className="text-accent-blue font-mono font-bold mb-2 block">{item.year}</span>
                   <h3 className="text-2xl font-bold mb-3 font-display">{item.title}</h3>
-                  <p className="text-brand-600 dark:text-darkbrand-600 leading-relaxed">{item.desc}</p>
+                  <p className="text-brand-700 dark:text-darkbrand-600 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             </motion.div>
@@ -82,7 +82,7 @@ export default function WhoWeAre() {
       <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold font-display mb-4">Our Backbone</h2>
-          <p className="text-brand-600 dark:text-darkbrand-600 max-w-xl mx-auto">The expertise driving our success and yours.</p>
+          <p className="text-brand-700 dark:text-darkbrand-600 max-w-xl mx-auto">The expertise driving our success and yours.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -101,7 +101,7 @@ export default function WhoWeAre() {
               </div>
               <h3 className="text-xl font-bold mb-2">{member.name}</h3>
               <p className="text-accent-blue font-medium mb-1">{member.role}</p>
-              <p className="text-sm text-brand-600 dark:text-darkbrand-600">{member.experience}</p>
+              <p className="text-sm text-brand-700 dark:text-darkbrand-600">{member.experience}</p>
             </motion.div>
           ))}
         </div>

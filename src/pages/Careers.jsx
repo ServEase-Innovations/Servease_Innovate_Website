@@ -28,11 +28,11 @@ export default function Careers() {
             <Briefcase size={16} />
             <span className="text-sm font-semibold uppercase tracking-wider">We are hiring</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">
+          <h2 className="text-5xl md:text-7xl font-bold font-display mb-6">
             Build the future <br/>
             <span className="gradient-text-custom">with us.</span>
-          </h1>
-          <p className="text-xl text-brand-600 dark:text-darkbrand-600 mb-8 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-xl text-brand-700 dark:text-darkbrand-600 mb-8 max-w-2xl mx-auto">
             Join a collective of passionate builders. We're tackling hard problems and shipping products that matter.
           </p>
         </motion.div>
@@ -55,7 +55,7 @@ export default function Careers() {
                 {benefit.icon}
               </div>
               <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
-              <p className="text-brand-600 dark:text-darkbrand-600 text-sm leading-relaxed">{benefit.desc}</p>
+              <p className="text-brand-700 dark:text-darkbrand-600 text-sm leading-relaxed">{benefit.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -77,7 +77,7 @@ export default function Careers() {
             >
               <div>
                 <h3 className="text-xl font-bold mb-2 group-hover:text-accent-blue transition-colors">{role.title}</h3>
-                <div className="flex gap-3 text-sm text-brand-600 dark:text-darkbrand-600">
+                <div className="flex gap-3 text-sm text-brand-700 dark:text-darkbrand-600">
                   <span className="bg-white dark:bg-darkbrand-100 shadow-sm px-2 py-1 rounded">{role.dept}</span>
                   <span className="bg-white dark:bg-darkbrand-100 shadow-sm px-2 py-1 rounded">{role.type}</span>
                 </div>
@@ -93,7 +93,7 @@ export default function Careers() {
         </div>
         
         <div className="mt-12 text-center p-8 border border-dashed border-brand-200 dark:border-darkbrand-200 rounded-2xl bg-white dark:bg-darkbrand-100 shadow-sm">
-          <p className="text-brand-600 dark:text-darkbrand-600 mb-4">Don't see a role that fits?</p>
+          <p className="text-brand-700 dark:text-darkbrand-600 mb-4">Don't see a role that fits?</p>
           <Link to="/contact" className="btn-primary py-2 px-6">Send an Open Application</Link>
         </div>
       </div>

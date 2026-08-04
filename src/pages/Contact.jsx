@@ -24,11 +24,11 @@ export default function Contact() {
               <Zap size={16} />
               <span className="text-sm font-semibold uppercase tracking-wider">Contact Us</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">
+            <h2 className="text-5xl md:text-7xl font-bold font-display mb-6">
               Let's build something <br/>
               <span className="gradient-text-custom">extraordinary.</span>
-            </h1>
-            <p className="text-xl text-brand-600 dark:text-darkbrand-600 max-w-2xl mx-auto">
+            </h2>
+            <p className="text-xl text-brand-700 dark:text-darkbrand-600 max-w-2xl mx-auto">
               Whether you have a fully fleshed-out RFP or just a napkin sketch, we're ready to engineer it.
             </p>
           </motion.div>
@@ -54,7 +54,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                  <p className="text-brand-600 dark:text-darkbrand-600 text-sm mb-2">{item.desc}</p>
+                  <p className="text-brand-700 dark:text-darkbrand-600 text-sm mb-2">{item.desc}</p>
                   <a href="#" className="text-accent-blue font-medium text-sm hover:underline">{item.info}</a>
                 </div>
               </div>
@@ -73,22 +73,22 @@ export default function Contact() {
             <form className="relative z-10 space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">First Name</label>
+                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">First Name</label>
                   <input type="text" placeholder="John" className={inputClasses('fname')} onFocus={() => setFocusedField('fname')} onBlur={() => setFocusedField(null)} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">Last Name</label>
+                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Last Name</label>
                   <input type="text" placeholder="Doe" className={inputClasses('lname')} onFocus={() => setFocusedField('lname')} onBlur={() => setFocusedField(null)} />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">Email Address</label>
+                <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Email Address</label>
                 <input type="email" placeholder="john@company.com" className={inputClasses('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-brand-600 dark:text-darkbrand-600 mb-2">How can we help?</label>
+                <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">How can we help?</label>
                 <textarea rows="4" placeholder="Tell us a little about your project..." className={inputClasses('message')} onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)} />
               </div>
 

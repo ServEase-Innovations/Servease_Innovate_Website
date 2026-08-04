@@ -109,7 +109,7 @@ export default function Navbar() {
                     onClick={(e) => scrollToSection(e, link.id)}
                     className="relative px-4 py-2 text-sm font-medium transition-colors z-10"
                   >
-                    <span className={`relative z-10 ${isActive ? 'text-brand-900' : 'text-brand-600 hover:text-brand-900'}`}>
+                    <span className={`relative z-10 ${isActive ? 'text-brand-900' : 'text-brand-700 hover:text-brand-900'}`}>
                       {link.label}
                     </span>
                     {isActive && (
@@ -126,7 +126,7 @@ export default function Navbar() {
 
             {/* Desktop CTA & Theme Toggle */}
             <div className="hidden md:flex items-center gap-4 z-10">
-              <button onClick={toggleTheme} className="p-2 rounded-full text-brand-600 hover:text-brand-900 dark:text-darkbrand-600 dark:hover:text-white transition-colors bg-brand-50 dark:bg-darkbrand-200">
+              <button aria-label="Toggle dark mode" onClick={toggleTheme} className="p-2 rounded-full text-brand-700 hover:text-brand-900 dark:text-darkbrand-600 dark:hover:text-white transition-colors bg-brand-50 dark:bg-darkbrand-200">
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
               <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="group flex items-center gap-2 bg-brand-900 dark:bg-accent-cyan text-white dark:text-darkbrand-50 px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:bg-black dark:hover:bg-accent-purple hover:shadow-lg hover:-translate-y-0.5 active:scale-95">
@@ -137,8 +137,9 @@ export default function Navbar() {
 
             {/* Mobile Toggle */}
             <button
+              aria-label="Toggle mobile menu"
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative z-50 p-2 text-brand-900 bg-brand-100 rounded-full"
+              className="md:hidden p-2 rounded-xl text-brand-700 hover:text-brand-900 hover:bg-brand-50 dark:text-darkbrand-600 dark:hover:text-white dark:hover:bg-darkbrand-200 transition-colors"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -165,7 +166,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.id)}
                     className={`text-lg font-medium p-4 rounded-2xl transition-colors ${
-                      isActive ? 'bg-brand-50 text-brand-900' : 'text-brand-600 hover:bg-brand-50 hover:text-brand-900'
+                      isActive ? 'bg-brand-50 text-brand-900' : 'text-brand-700 hover:bg-brand-50 hover:text-brand-900'
                     }`}
                   >
                     {link.label}

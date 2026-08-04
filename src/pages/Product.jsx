@@ -24,11 +24,11 @@ export default function Product() {
               <span className="text-sm font-semibold tracking-wide uppercase">ServEaso</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold font-display leading-[1.1] mb-6">
+            <h2 className="text-5xl md:text-7xl font-bold font-display leading-[1.1] mb-6">
               Meet Our <span className="text-gradient-primary">Flagship Product</span>
-            </h1>
+            </h2>
             
-            <p className="text-xl text-brand-600 dark:text-darkbrand-600 leading-relaxed mb-8">
+            <p className="text-xl text-brand-700 dark:text-darkbrand-600 leading-relaxed mb-8">
               A revolutionary location-based home care application. We connect busy professionals and families with highly-vetted, trusted household help—on demand.
             </p>
 
@@ -43,7 +43,7 @@ export default function Product() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 + (i * 0.1) }}
-                  className="flex items-center gap-3 text-brand-600 dark:text-darkbrand-600"
+                  className="flex items-center gap-3 text-brand-700 dark:text-darkbrand-600"
                 >
                   <CheckCircle2 className="text-accent-blue shrink-0" size={20} />
                   <span>{feature}</span>
@@ -78,7 +78,7 @@ export default function Product() {
                 </div>
                 
                 <h3 className="text-2xl font-bold mb-2">Find Help Nearby</h3>
-                <p className="text-sm text-brand-600 dark:text-darkbrand-600 mb-6"><MapPin size={12} className="inline mr-1" /> Bangalore, India</p>
+                <p className="text-sm text-brand-700 dark:text-darkbrand-600 mb-6"><MapPin size={12} className="inline mr-1" /> Bangalore, India</p>
 
                 <div className="space-y-3">
                   {[1, 2, 3].map((card) => (

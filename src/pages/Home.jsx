@@ -39,7 +39,7 @@ export default function Home() {
             Scale <span className="text-gradient-primary">faster.</span>
           </h1>
           
-          <p className="text-xl text-brand-600 dark:text-darkbrand-600 leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0">
+          <p className="text-xl text-brand-700 dark:text-darkbrand-600 leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0">
             We engineer high-performance web and mobile applications for companies that demand excellence. Stop settling for mediocre software.
           </p>
           
@@ -125,7 +125,7 @@ export default function Home() {
       <div className="relative z-10 py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Built for the modern web.</h2>
-          <p className="text-xl text-brand-600 dark:text-darkbrand-600">We don't just write code. We architect solutions that give you a competitive edge in the market.</p>
+          <p className="text-xl text-brand-700 dark:text-darkbrand-600">We don't just write code. We architect solutions that give you a competitive edge in the market.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -142,7 +142,7 @@ export default function Home() {
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold font-display mb-3">{feature.title}</h3>
-              <p className="text-brand-600 dark:text-darkbrand-600 leading-relaxed">{feature.desc}</p>
+              <p className="text-brand-700 dark:text-darkbrand-600 leading-relaxed">{feature.desc}</p>
             </motion.div>
           ))}
         </div>

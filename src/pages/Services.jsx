@@ -75,15 +75,15 @@ export default function Services() {
         >
           <div className="inline-flex items-center gap-2 bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
             <Sparkles size={16} className="text-accent-blue" />
-            <span className="text-brand-600 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Our Capabilities</span>
+            <span className="text-brand-700 dark:text-darkbrand-600 text-sm font-semibold tracking-wider uppercase">Our Capabilities</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold font-display leading-tight mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold font-display leading-tight mb-6">
             Engineering excellence <br />
             <span className="gradient-text-custom">delivered.</span>
-          </h1>
+          </h2>
           
-          <p className="text-lg md:text-xl text-brand-600 dark:text-darkbrand-600 leading-relaxed">
+          <p className="text-lg md:text-xl text-brand-700 dark:text-darkbrand-600 leading-relaxed">
             From strategic ideation to flawless execution, we provide the technical firepower required to scale your vision. No compromises.
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export default function Services() {
                   
                   <h4 className="text-sm font-mono text-accent-blue mb-2 uppercase tracking-wider">{service.subtitle}</h4>
                   <h3 className="text-2xl font-bold mb-4 font-display">{service.title}</h3>
-                  <p className="text-brand-600 dark:text-darkbrand-600 leading-relaxed mb-8">
+                  <p className="text-brand-700 dark:text-darkbrand-600 leading-relaxed mb-8">
                     {service.description}
                   </p>
                   
@@ -137,7 +137,7 @@ export default function Services() {
               <div className="absolute inset-0 bg-grid-pattern opacity-30" />
               <div className="relative z-10">
                 <h3 className="text-3xl font-bold mb-4 font-display text-brand-900 dark:text-white">Don't see what you need?</h3>
-                <p className="text-brand-600 dark:text-darkbrand-600 mb-8">
+                <p className="text-brand-700 dark:text-darkbrand-600 mb-8">
                   We specialize in custom solutions. Let's talk about your unique technical challenges.
                 </p>
                 <Link to="/contact" className="btn-primary bg-white dark:bg-darkbrand-100 text-brand-900 dark:text-white hover:bg-white dark:bg-darkbrand-100 border-none shadow-xl">
