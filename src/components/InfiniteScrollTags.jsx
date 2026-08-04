@@ -25,7 +25,7 @@ export default function InfiniteScrollTags() {
       {/* Row 1: Continuous scrolling left */}
       <div className="flex w-max">
         <div 
-          className="flex gap-4 pr-4 animate-marquee-left"
+          className="flex gap-4 pr-4 animate-marquee-left will-change-transform"
         >
           {infiniteTags.map((tag, i) => (
             <div 
@@ -44,7 +44,7 @@ export default function InfiniteScrollTags() {
       {/* Row 2: Continuous scrolling right */}
       <div className="flex w-max">
         <div 
-          className="flex gap-4 pr-4 animate-marquee-right"
+          className="flex gap-4 pr-4 animate-marquee-right will-change-transform"
         >
           {infiniteTags.reverse().map((tag, i) => (
             <div 
