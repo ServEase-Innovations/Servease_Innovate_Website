@@ -85,7 +85,7 @@ export default function Careers() {
               
               <div className="mt-4 md:mt-0">
                 <a href="#contact" className="inline-flex items-center gap-2 text-accent-blue font-semibold group-hover:gap-3 transition-all">
-                  Apply Now <ArrowRight size={16} />
+                  Apply Now <ChevronRight size={16} />
                 </a>
               </div>
             </motion.div>
