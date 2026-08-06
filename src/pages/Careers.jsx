@@ -84,9 +84,9 @@ export default function Careers() {
               </div>
               
               <div className="mt-4 md:mt-0">
-                <Link to="/contact" className="inline-flex items-center gap-2 text-accent-blue font-semibold group-hover:gap-3 transition-all">
-                  Apply Now <ChevronRight size={16} />
-                </Link>
+                <a href="#contact" className="inline-flex items-center gap-2 text-accent-blue font-semibold group-hover:gap-3 transition-all">
+                  Apply Now <ArrowRight size={16} />
+                </a>
               </div>
             </motion.div>
           ))}
@@ -94,7 +94,7 @@ export default function Careers() {
         
         <div className="mt-12 text-center p-8 border border-dashed border-brand-200 dark:border-darkbrand-200 rounded-2xl bg-white dark:bg-darkbrand-100 shadow-sm">
           <p className="text-brand-700 dark:text-darkbrand-600 mb-4">Don't see a role that fits?</p>
-          <Link to="/contact" className="btn-primary py-2 px-6">Send an Open Application</Link>
+          <a href="#contact" className="btn-primary py-2 px-6">Send an Open Application</a>
         </div>
       </div>
 

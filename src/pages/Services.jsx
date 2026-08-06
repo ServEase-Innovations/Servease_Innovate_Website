@@ -117,9 +117,9 @@ export default function Services() {
                     {service.description}
                   </p>
                   
-                  <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-900 dark:text-white group-hover:text-accent-blue transition-colors">
+                  <a href="#contact" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-900 dark:text-white group-hover:text-accent-blue transition-colors">
                     Discuss your project <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -140,9 +140,9 @@ export default function Services() {
                 <p className="text-brand-700 dark:text-darkbrand-600 mb-8">
                   We specialize in custom solutions. Let's talk about your unique technical challenges.
                 </p>
-                <Link to="/contact" className="btn-primary bg-white dark:bg-darkbrand-100 text-brand-900 dark:text-white hover:bg-white dark:bg-darkbrand-100 border-none shadow-xl">
-                  Contact Us
-                </Link>
+                <a href="#contact" className="btn-primary bg-white dark:bg-darkbrand-100 text-brand-900 dark:text-white hover:bg-white dark:bg-darkbrand-100 border-none shadow-xl">
+                  Get a Free Consultation
+                </a>
               </div>
             </div>
           </motion.div>
