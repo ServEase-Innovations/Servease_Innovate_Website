@@ -4,6 +4,29 @@ import { Mail, MessageSquare, MapPin, Send, Zap } from 'lucide-react';
 
 export default function Contact() {
   const [focusedField, setFocusedField] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.target);
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => {
+        setIsSuccess(true);
+        setIsSubmitting(false);
+      })
+      .catch(() => {
+        alert('There was an error submitting the form. Please try again.');
+        setIsSubmitting(false);
+      });
+  };
 
   const inputClasses = (name) => `
     w-full bg-white dark:bg-darkbrand-100 shadow-sm border border-brand-200 dark:border-darkbrand-200 rounded-xl px-4 py-4 text-brand-900 dark:text-white placeholder-white/30
@@ -70,32 +93,58 @@ export default function Contact() {
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-accent-blue/10 blur-[80px] pointer-events-none" />
             
-            <form className="relative z-10 space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">First Name</label>
-                  <input type="text" placeholder="John" className={inputClasses('fname')} onFocus={() => setFocusedField('fname')} onBlur={() => setFocusedField(null)} />
+            {isSuccess ? (
+              <div className="relative z-10 text-center py-12 px-6 bg-green-50/50 dark:bg-green-900/10 border border-green-200 dark:border-green-800/30 rounded-2xl">
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-800/50 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Send size={24} />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Last Name</label>
-                  <input type="text" placeholder="Doe" className={inputClasses('lname')} onFocus={() => setFocusedField('lname')} onBlur={() => setFocusedField(null)} />
+                <h3 className="text-2xl font-bold text-brand-900 dark:text-white mb-3">Message Sent!</h3>
+                <p className="text-brand-700 dark:text-darkbrand-600 mb-8 max-w-sm mx-auto">
+                  Thank you for reaching out. Our team will get back to you shortly.
+                </p>
+                <button 
+                  onClick={() => setIsSuccess(false)} 
+                  className="btn-outline border-brand-200 dark:border-darkbrand-200 hover:border-brand-900 dark:hover:border-white"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <form className="relative z-10 space-y-6" name="contact" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden">
+                  <label>
+                    Don’t fill this out if you're human: <input name="bot-field" />
+                  </label>
+                </p>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">First Name</label>
+                    <input type="text" name="firstName" required placeholder="John" className={inputClasses('fname')} onFocus={() => setFocusedField('fname')} onBlur={() => setFocusedField(null)} />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Last Name</label>
+                    <input type="text" name="lastName" required placeholder="Doe" className={inputClasses('lname')} onFocus={() => setFocusedField('lname')} onBlur={() => setFocusedField(null)} />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Email Address</label>
-                <input type="email" placeholder="john@company.com" className={inputClasses('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">Email Address</label>
+                  <input type="email" name="email" required placeholder="john@company.com" className={inputClasses('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">How can we help?</label>
-                <textarea rows="4" placeholder="Tell us a little about your project..." className={inputClasses('message')} onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)} />
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-brand-700 dark:text-darkbrand-600 mb-2">How can we help?</label>
+                  <textarea rows="4" name="message" required placeholder="Tell us a little about your project..." className={inputClasses('message')} onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)} />
+                </div>
 
-              <button className="w-full btn-primary justify-center py-4 text-lg">
-                Send Message <Send size={20} className="ml-2" />
-              </button>
-            </form>
+                <button type="submit" disabled={isSubmitting} className="w-full btn-primary justify-center py-4 text-lg disabled:opacity-70 transition-opacity">
+                  {isSubmitting ? 'Sending...' : (
+                    <>Send Message <Send size={20} className="ml-2" /></>
+                  )}
+                </button>
+              </form>
+            )}
           </motion.div>
 
         </div>
