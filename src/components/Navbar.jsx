@@ -83,7 +83,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-6 pb-4 pointer-events-none">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -98,7 +98,7 @@ export default function Navbar() {
               <div className="w-10 h-10 rounded-full overflow-hidden bg-transparent flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img src={logo} alt="ServEase Innovation Logo" className="w-full h-full object-contain" />
               </div>
-              <span className="font-display font-bold text-xl tracking-tight text-brand-900">ServEase Innovation</span>
+              <span className="font-display font-bold text-xl tracking-tight text-brand-900 whitespace-nowrap hidden lg:block">ServEase Innovation</span>
             </a>
 
             {/* Desktop Navigation */}
@@ -112,7 +112,7 @@ export default function Navbar() {
                     onClick={(e) => scrollToSection(e, link.id)}
                     className="relative px-4 py-2 text-sm font-medium transition-colors z-10"
                   >
-                    <span className={`relative z-10 ${isActive ? 'text-brand-900' : 'text-brand-700 hover:text-brand-900'}`}>
+                    <span className={`relative z-10 whitespace-nowrap ${isActive ? 'text-brand-900' : 'text-brand-700 hover:text-brand-900'}`}>
                       {link.label}
                     </span>
                     {isActive && (
@@ -132,7 +132,7 @@ export default function Navbar() {
               <button aria-label="Toggle dark mode" onClick={toggleTheme} className="p-2 rounded-full text-brand-700 hover:text-brand-900 dark:text-darkbrand-600 dark:hover:text-white transition-colors bg-brand-50 dark:bg-darkbrand-200">
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
-              <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="group flex items-center gap-2 bg-brand-900 dark:bg-accent-cyan text-white dark:text-darkbrand-50 px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:bg-black dark:hover:bg-accent-purple hover:shadow-lg hover:-translate-y-0.5 active:scale-95">
+              <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="group flex items-center gap-2 bg-brand-900 dark:bg-accent-cyan text-white dark:text-darkbrand-50 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all hover:bg-black dark:hover:bg-accent-purple hover:shadow-lg hover:-translate-y-0.5 active:scale-95">
                 Get Started
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </a>
