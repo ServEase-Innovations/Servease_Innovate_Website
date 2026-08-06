@@ -61,8 +61,10 @@ export default function Navbar() {
       { rootMargin: '-40% 0px -60% 0px' } // triggers when section is near middle of viewport
     );
 
-    navLinks.forEach((link) => {
-      const el = document.getElementById(link.id);
+    const sectionsToObserve = [...navLinks.map(link => link.id), 'contact'];
+    
+    sectionsToObserve.forEach((id) => {
+      const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
