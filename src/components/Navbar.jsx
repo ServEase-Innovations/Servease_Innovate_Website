@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, Moon, Sun } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import logo from "../assets/logo.png";
 
 const navLinks = [
@@ -16,30 +16,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    // Check initial theme from localStorage or system preference
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-      setIsDark(true);
-    } else {
-      document.documentElement.classList.remove('dark');
-      setIsDark(false);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-      setIsDark(true);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,11 +103,8 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Desktop CTA & Theme Toggle */}
+            {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-4 z-10">
-              <button aria-label="Toggle dark mode" onClick={toggleTheme} className="p-2 rounded-full text-brand-700 hover:text-brand-900 dark:text-darkbrand-600 dark:hover:text-white transition-colors bg-brand-50 dark:bg-darkbrand-200">
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
               <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="group flex items-center gap-2 bg-brand-900 dark:bg-accent-cyan text-white dark:text-darkbrand-50 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all hover:bg-black dark:hover:bg-accent-purple hover:shadow-lg hover:-translate-y-0.5 active:scale-95">
                 Get Started
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
